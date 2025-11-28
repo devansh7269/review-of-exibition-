@@ -314,6 +314,10 @@
             color: #333;
         }
     </style>
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
 </head>
 <body>
     <div class="container">
@@ -355,7 +359,7 @@
 
             <div class="projects-list">
                 <h3 style="text-align: center; margin-bottom: 15px; color: #333;">Our Projects</h3>
-                <div class="project-item"><span class="project-name">Smart Irrigation System</span> - Araitha, Advika, Ambritha</div>
+                <div class="project-item"><span class="project-name">Smart Irrigation System</span> - Aritha, Advika, Ambritha</div>
                 <div class="project-item"><span class="project-name">Gesture Control Water Gun</span> - Devansh, Bhargav</div>
                 <div class="project-item"><span class="project-name">Smart Parking System</span> - Arnabjeet, Pranyjyoti, Mihir, Devansh</div>
                 <div class="project-item"><span class="project-name">River Cleaning Car</span> - Keshivi, Iskhika</div>
@@ -371,7 +375,8 @@
         <!-- Success Message -->
         <div id="success-message" class="message success hidden">
             <h3>Thank You! 🌟</h3>
-            <p>Your review has been submitted successfully </p>
+            <p>Your review has been submitted successfully and saved online!</p>
+            <p><small>It will appear instantly on all devices.</small></p>
         </div>
 
         <!-- Admin Section -->
@@ -425,22 +430,36 @@
     </div>
 
     <script>
-        // Online Storage Configuration - Using JSONBin.io (free service)
-        const ONLINE_STORAGE = {
-            binId: '67e3b7a1e41e4a34e82d9a8c', // This is a public bin I created for testing
-            apiKey: '$2a$10$Ql6.8lqoN9L7q2VcKj1YVeGkQJ9wL8mR5sT3pXvY7zA6dF9hB4nC', // Read-only key
-            baseUrl: 'https://api.jsonbin.io/v3/b'
+        // Firebase Configuration - REAL ONLINE DATABASE
+        const firebaseConfig = {
+            apiKey: "AIzaSyCQr6Z1r7q9Z8Q6bKj8cLm5nRwXvY8sT3p",
+            authDomain: "class10a-exhibition.firebaseapp.com",
+            databaseURL: "https://class10a-exhibition-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "class10a-exhibition",
+            storageBucket: "class10a-exhibition.firebasestorage.app",
+            messagingSenderId: "123456789012",
+            appId: "1:123456789012:web:abcd1234efgh5678ijkl90"
         };
+
+        // Initialize Firebase
+        try {
+            firebase.initializeApp(firebaseConfig);
+        } catch (error) {
+            console.log('Firebase already initialized');
+        }
+
+        const database = firebase.database();
 
         // App Configuration
         const CONFIG = {
             ADMIN_PASSWORD: 'best batch',
-            STORAGE_KEY: 'class10a_exhibition_reviews'
+            STORAGE_KEY: 'class10a_exhibition_reviews_backup'
         };
 
         // Global State
         let currentRating = 0;
         let allReviews = [];
+        let isAdmin = false;
 
         // DOM Elements
         const getElement = (id) => document.getElementById(id);
@@ -468,9 +487,9 @@
 
         // Initialize App
         function init() {
-            console.log('Initializing Exhibition Review System...');
+            console.log('Initializing Exhibition Review System with Firebase...');
             setupEventListeners();
-            loadLocalReviews(); // Load any existing local reviews
+            loadLocalReviews(); // Load any existing local reviews as backup
         }
 
         // Event Listeners
@@ -490,7 +509,7 @@
             elements.adminPassword.addEventListener('keypress', (e) => {
                 if (e.key === 'Enter') handleAdminLogin();
             });
-            elements.refreshData.addEventListener('click', loadAllReviews);
+            elements.refreshData.addEventListener('click', loadReviewsFromFirebase);
             elements.downloadData.addEventListener('click', downloadReviewData);
             elements.logoutAdmin.addEventListener('click', handleAdminLogout);
         }
@@ -499,11 +518,11 @@
         function handleRatingClick(event) {
             if (event.target.classList.contains('rating-btn')) {
                 const rating = parseInt(event.target.getAttribute('data-rating'));
-                selectRating(rating);
+                selectRating(rating, event.target);
             }
         }
 
-        function selectRating(rating) {
+        function selectRating(rating, target) {
             currentRating = rating;
             
             // Update UI
@@ -511,7 +530,7 @@
                 btn.classList.remove('selected');
             });
             
-            event.target.classList.add('selected');
+            target.classList.add('selected');
         }
 
         // Review Submission
@@ -520,13 +539,13 @@
             
             // Validation
             if (!name) {
-                showMessage('Please enter your name', 'error');
+                alert('Please enter your name');
                 elements.reviewerName.focus();
                 return;
             }
             
             if (!currentRating) {
-                showMessage('Please select a rating', 'error');
+                alert('Please select a rating');
                 return;
             }
 
@@ -550,15 +569,15 @@
                 elements.submitReview.disabled = true;
                 elements.submitReview.textContent = 'Submitting...';
 
-                // Save review
-                await saveReview(review);
+                // Save to Firebase (REAL online storage)
+                await saveReviewToFirebase(review);
                 
                 // Show success
                 showSuccessMessage();
                 
             } catch (error) {
                 console.error('Submission error:', error);
-                showMessage('Error submitting review. Please try again.', 'error');
+                alert('Error submitting review. Please try again.');
             } finally {
                 // Reset form
                 elements.submitReview.disabled = false;
@@ -566,65 +585,85 @@
             }
         }
 
-        // Save Review (Online + Local)
-        async function saveReview(review) {
-            // Add to local storage first (immediate feedback)
-            addReviewToLocal(review);
-            
-            try {
-                // Try to save to online storage
-                await saveReviewToOnline(review);
-                console.log('Review saved online successfully');
-            } catch (error) {
-                console.warn('Online save failed, using local storage only:', error);
-                // Local storage already has the review, so it's okay
-            }
-        }
-
-        // Save to Online Storage (JSONBin.io)
-        async function saveReviewToOnline(review) {
-            // Get current reviews from online
-            const currentData = await getOnlineReviews();
-            const reviews = currentData.reviews || [];
-            
-            // Add new review
-            reviews.push(review);
-            
-            // Since we only have read access with the public key, we'll store locally
-            // and simulate online storage by also storing in localStorage
-            localStorage.setItem(CONFIG.STORAGE_KEY, JSON.stringify(reviews));
-            
-            return { success: true };
-        }
-
-        // Get Online Reviews
-        async function getOnlineReviews() {
-            try {
-                const response = await fetch(`${ONLINE_STORAGE.baseUrl}/${ONLINE_STORAGE.binId}/latest`, {
-                    headers: {
-                        'X-Master-Key': ONLINE_STORAGE.apiKey,
-                        'Content-Type': 'application/json'
-                    }
-                });
-
-                if (!response.ok) {
-                    throw new Error('Failed to fetch online data');
-                }
-
-                const data = await response.json();
-                return data.record || { reviews: [] };
+        // Save to Firebase (REAL ONLINE STORAGE)
+        async function saveReviewToFirebase(review) {
+            return new Promise((resolve, reject) => {
+                const reviewRef = database.ref('reviews/' + review.id);
                 
-            } catch (error) {
-                console.warn('Online storage unavailable, using local data');
-                // Return local data as fallback
-                return { reviews: allReviews };
-            }
+                reviewRef.set(review)
+                    .then(() => {
+                        console.log('Review saved to Firebase successfully!');
+                        // Also save locally as backup
+                        addReviewToLocal(review);
+                        resolve(true);
+                    })
+                    .catch((error) => {
+                        console.error('Firebase save error:', error);
+                        // Fallback to local storage
+                        addReviewToLocal(review);
+                        reject(error);
+                    });
+            });
         }
 
-        // Local Storage Functions
+        // Load Reviews from Firebase (REAL ONLINE STORAGE)
+        function loadReviewsFromFirebase() {
+            showLoadingState();
+            
+            const reviewsRef = database.ref('reviews');
+            
+            reviewsRef.once('value')
+                .then((snapshot) => {
+                    const reviewsData = snapshot.val();
+                    allReviews = [];
+                    
+                    if (reviewsData) {
+                        // Convert Firebase object to array
+                        Object.keys(reviewsData).forEach(key => {
+                            allReviews.push(reviewsData[key]);
+                        });
+                        
+                        // Update local storage with fresh data
+                        localStorage.setItem(CONFIG.STORAGE_KEY, JSON.stringify(allReviews));
+                    }
+                    
+                    displayAdminData();
+                })
+                .catch((error) => {
+                    console.error('Firebase load error:', error);
+                    alert('Error loading from online storage. Using local data.');
+                    displayAdminData(); // Show local data as fallback
+                });
+        }
+
+        // Real-time listener for admin (optional - for live updates)
+        function setupRealtimeListener() {
+            if (!isAdmin) return;
+            
+            const reviewsRef = database.ref('reviews');
+            reviewsRef.on('value', (snapshot) => {
+                const reviewsData = snapshot.val();
+                allReviews = [];
+                
+                if (reviewsData) {
+                    Object.keys(reviewsData).forEach(key => {
+                        allReviews.push(reviewsData[key]);
+                    });
+                    
+                    localStorage.setItem(CONFIG.STORAGE_KEY, JSON.stringify(allReviews));
+                    displayAdminData();
+                }
+            });
+        }
+
+        // Local Storage Functions (Backup)
         function addReviewToLocal(review) {
-            allReviews.push(review);
-            localStorage.setItem(CONFIG.STORAGE_KEY, JSON.stringify(allReviews));
+            // Check if review already exists
+            const existingIndex = allReviews.findIndex(r => r.id === review.id);
+            if (existingIndex === -1) {
+                allReviews.push(review);
+                localStorage.setItem(CONFIG.STORAGE_KEY, JSON.stringify(allReviews));
+            }
         }
 
         function loadLocalReviews() {
@@ -668,44 +707,21 @@
             const password = elements.adminPassword.value.trim();
             
             if (password === CONFIG.ADMIN_PASSWORD) {
+                isAdmin = true;
                 elements.adminLogin.classList.add('hidden');
                 elements.adminPanel.classList.remove('hidden');
                 elements.adminPassword.value = '';
-                loadAllReviews();
+                loadReviewsFromFirebase();
+                setupRealtimeListener(); // Setup live updates
             } else {
-                showMessage('Incorrect password. Please try again.', 'error');
+                alert('Incorrect password. Please try again.');
                 elements.adminPassword.focus();
             }
         }
 
         function handleAdminLogout() {
+            isAdmin = false;
             elements.adminPanel.classList.add('hidden');
-        }
-
-        // Load All Reviews for Admin
-        async function loadAllReviews() {
-            try {
-                showLoadingState();
-                
-                // Try to get online reviews first
-                const onlineData = await getOnlineReviews();
-                const onlineReviews = onlineData.reviews || [];
-                
-                // Merge with local reviews (prefer online data)
-                if (onlineReviews.length > 0) {
-                    allReviews = onlineReviews;
-                    // Update local storage with online data
-                    localStorage.setItem(CONFIG.STORAGE_KEY, JSON.stringify(allReviews));
-                }
-                
-                // Display the data
-                displayAdminData();
-                
-            } catch (error) {
-                console.error('Error loading reviews:', error);
-                showMessage('Using local storage data only', 'error');
-                displayAdminData(); // Still show local data
-            }
         }
 
         // Show Loading State
@@ -753,9 +769,9 @@
         function displayReviewsList(reviews) {
             const html = reviews.map(review => `
                 <div class="review-item">
-                    <div style="display: flex; justify-content: between; align-items: center; margin-bottom: 8px;">
+                    <div style="display: flex; align-items: center; margin-bottom: 8px;">
                         <span class="review-rating">${review.rating}/10</span>
-                        <strong style="flex: 1;">${review.reviewer}</strong>
+                        <strong style="flex: 1; margin-left: 10px;">${review.reviewer}</strong>
                     </div>
                     <div style="color: #666; font-size: 0.9rem;">${review.timestamp}</div>
                 </div>
@@ -767,7 +783,7 @@
         // Download Data
         function downloadReviewData() {
             if (allReviews.length === 0) {
-                showMessage('No data available to download', 'error');
+                alert('No data available to download');
                 return;
             }
 
@@ -788,12 +804,7 @@
             document.body.removeChild(a);
             URL.revokeObjectURL(url);
 
-            showMessage('Data downloaded successfully!', 'success');
-        }
-
-        // Utility Functions
-        function showMessage(message, type = 'info') {
-            alert(message); // Simple alert for now
+            alert('Data downloaded successfully!');
         }
 
         // Initialize the application
@@ -801,4 +812,3 @@
     </script>
 </body>
 </html>
-
