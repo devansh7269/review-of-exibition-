@@ -348,7 +348,7 @@
         </header>
         
         <div class="progress-container">
-            <div class="progress-text">Review Progress: <span id="progress-text">0/8</span></div>
+            <div class="progress-text">Review Progress: <span id="progress-text">0/9</span></div>
             <div class="progress-bar">
                 <div class="progress" id="progress-bar"></div>
             </div>
@@ -471,6 +471,20 @@
                 <div class="project-name">
                     <strong>Rainwater Harvesting</strong>
                     <div class="project-creators">Advika, Rupsha, Rajashree, Samridhi</div>
+                </div>
+                <div class="collective-rating">
+                    <div class="collective-rating-option" data-value="1">1</div>
+                    <div class="collective-rating-option" data-value="2">2</div>
+                    <div class="collective-rating-option" data-value="3">3</div>
+                    <div class="collective-rating-option" data-value="4">4</div>
+                    <div class="collective-rating-option" data-value="5">5</div>
+                </div>
+            </div>
+            
+            <div class="project-rating-row">
+                <div class="project-name">
+                    <strong>Plasma Canon</strong>
+                    <div class="project-creators">Yogiraj, Niloy, Shaurav</div>
                 </div>
                 <div class="collective-rating">
                     <div class="collective-rating-option" data-value="1">1</div>
@@ -633,7 +647,7 @@
         <div class="project-card project" id="project5" style="display: none;">
             <span class="project-number">5</span>
             <h2 class="project-title">Earth Revolution</h2>
-            <p class="project-creators">Created by: Purnendu, Aditiya, Anish, Ankur</p>
+            <p class="project-creators">Created by: Pranyjyoti</p>
             <div class="review-section">
                 <p>Please rate this project:</p>
                 <div class="rating">
@@ -700,6 +714,39 @@
             <span class="project-number">7</span>
             <h2 class="project-title">Rainwater Harvesting</h2>
             <p class="project-creators">Created by: Advika, Rupsha, Rajashree, Samridhi</p>
+            <div class="review-section">
+                <p>Please rate this project:</p>
+                <div class="rating">
+                    <div class="rating-option" data-value="1">
+                        <div class="rating-value">1</div>
+                        <div class="rating-label">Poor</div>
+                    </div>
+                    <div class="rating-option" data-value="2">
+                        <div class="rating-value">2</div>
+                        <div class="rating-label">Fair</div>
+                    </div>
+                    <div class="rating-option" data-value="3">
+                        <div class="rating-value">3</div>
+                        <div class="rating-label">Good</div>
+                    </div>
+                    <div class="rating-option" data-value="4">
+                        <div class="rating-value">4</div>
+                        <div class="rating-label">Very Good</div>
+                    </div>
+                    <div class="rating-option" data-value="5">
+                        <div class="rating-value">5</div>
+                        <div class="rating-label">Excellent</div>
+                    </div>
+                </div>
+                <button class="next-btn" data-next="project8">Next Project</button>
+            </div>
+        </div>
+        
+        <!-- Project 8 - Plasma Canon -->
+        <div class="project-card project" id="project8" style="display: none;">
+            <span class="project-number">8</span>
+            <h2 class="project-title">Plasma Canon</h2>
+            <p class="project-creators">Created by: Yogiraj, Niloy, Shaurav</p>
             <div class="review-section">
                 <p>Please rate this project:</p>
                 <div class="rating">
@@ -819,7 +866,7 @@
         
         // Initialize progress
         let currentStep = 0;
-        const totalSteps = 8;
+        const totalSteps = 9;
         
         // Review type selection
         detailedReviewBtn.addEventListener('click', () => {
@@ -906,7 +953,7 @@
                 
                 if (nextId === 'cultural') {
                     document.getElementById('cultural').style.display = 'block';
-                    updateProgress(8);
+                    updateProgress(9);
                 } else {
                     document.getElementById(nextId).style.display = 'block';
                     updateProgress(parseInt(nextId.replace('project', '')) + 1);
@@ -936,6 +983,7 @@
                     "Earth Revolution": currentProjectRatings['project5'],
                     "Carbon Emission to Ink Converter": currentProjectRatings['project6'],
                     "Rainwater Harvesting": currentProjectRatings['project7'],
+                    "Plasma Canon": currentProjectRatings['project8'],
                     "Cultural and Indigenous Tribes Exhibition": culturalRating
                 }
             };
@@ -949,7 +997,7 @@
             // Hide cultural section and show thank you
             document.getElementById('cultural').style.display = 'none';
             thankYouSection.style.display = 'block';
-            updateProgress(9); // All done
+            updateProgress(10); // All done
         });
         
         // Submit collective review
@@ -963,6 +1011,7 @@
                 "Earth Revolution",
                 "Carbon Emission to Ink Converter",
                 "Rainwater Harvesting",
+                "Plasma Canon",
                 "Cultural and Indigenous Tribes Exhibition"
             ];
             
@@ -996,7 +1045,7 @@
             // Hide collective section and show thank you
             collectiveReviewSection.style.display = 'none';
             thankYouSection.style.display = 'block';
-            updateProgress(9); // All done
+            updateProgress(10); // All done
         });
         
         // Admin login
@@ -1061,6 +1110,7 @@
                 "Earth Revolution",
                 "Carbon Emission to Ink Converter",
                 "Rainwater Harvesting",
+                "Plasma Canon",
                 "Cultural and Indigenous Tribes Exhibition"
             ];
             
@@ -1141,6 +1191,7 @@
                 "Earth Revolution",
                 "Carbon Emission to Ink Converter",
                 "Rainwater Harvesting",
+                "Plasma Canon",
                 "Cultural and Indigenous Tribes Exhibition"
             ];
             
@@ -1219,4 +1270,3 @@
     </script>
 </body>
 </html>
-
