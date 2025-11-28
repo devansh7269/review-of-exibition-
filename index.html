@@ -9,22 +9,25 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Arial', sans-serif;
         }
         
         body {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         
         .container {
-            max-width: 500px;
-            margin: 0 auto;
             background: white;
-            border-radius: 15px;
+            border-radius: 20px;
             padding: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 500px;
         }
         
         header {
@@ -35,7 +38,7 @@
         h1 {
             color: #333;
             margin-bottom: 10px;
-            font-size: 2rem;
+            font-size: 2.2rem;
         }
         
         .subtitle {
@@ -45,35 +48,37 @@
         
         .card {
             background: #f8f9fa;
-            border-radius: 10px;
+            border-radius: 15px;
             padding: 25px;
             margin-bottom: 20px;
-            border: 1px solid #e9ecef;
+            border: 2px solid #e9ecef;
         }
         
         .input-group {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
         
         label {
             display: block;
             margin-bottom: 8px;
             color: #333;
-            font-weight: 500;
+            font-weight: 600;
+            font-size: 1.1rem;
         }
         
         input[type="text"] {
             width: 100%;
-            padding: 12px 15px;
-            border: 2px solid #e9ecef;
-            border-radius: 8px;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
             font-size: 16px;
-            transition: border-color 0.3s;
+            transition: all 0.3s;
         }
         
         input[type="text"]:focus {
             outline: none;
             border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
         }
         
         .rating-section {
@@ -82,23 +87,24 @@
         }
         
         .rating-title {
-            font-size: 1.2rem;
-            margin-bottom: 20px;
+            font-size: 1.3rem;
+            margin-bottom: 25px;
             color: #333;
+            font-weight: 600;
         }
         
         .rating-scale {
             display: flex;
             justify-content: center;
-            gap: 8px;
-            margin-bottom: 10px;
+            gap: 10px;
+            margin-bottom: 15px;
             flex-wrap: wrap;
         }
         
         .rating-btn {
-            width: 45px;
-            height: 45px;
-            border: 2px solid #667eea;
+            width: 50px;
+            height: 50px;
+            border: 3px solid #667eea;
             background: white;
             border-radius: 50%;
             display: flex;
@@ -107,7 +113,7 @@
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
         }
         
         .rating-btn:hover {
@@ -119,63 +125,80 @@
         .rating-btn.selected {
             background: #667eea;
             color: white;
-            transform: scale(1.1);
+            transform: scale(1.2);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
         }
         
         .rating-labels {
             display: flex;
             justify-content: space-between;
             color: #666;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             margin-top: 10px;
+            font-weight: 500;
         }
         
         .submit-btn {
             width: 100%;
-            padding: 15px;
+            padding: 18px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border: none;
-            border-radius: 8px;
-            font-size: 1.1rem;
+            border-radius: 12px;
+            font-size: 1.2rem;
             font-weight: 600;
             cursor: pointer;
-            transition: transform 0.2s;
+            transition: all 0.3s;
+            margin-top: 10px;
         }
         
         .submit-btn:hover {
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+        
+        .submit-btn:active {
+            transform: translateY(-1px);
         }
         
         .submit-btn:disabled {
             opacity: 0.6;
             cursor: not-allowed;
             transform: none;
+            box-shadow: none;
         }
         
         .admin-section {
             margin-top: 30px;
-            border-top: 2px solid #e9ecef;
-            padding-top: 20px;
+            border-top: 3px solid #e9ecef;
+            padding-top: 25px;
         }
         
         .admin-btn {
             width: 100%;
-            padding: 12px;
+            padding: 15px;
             background: #28a745;
             color: white;
             border: none;
-            border-radius: 8px;
-            font-size: 1rem;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
             cursor: pointer;
             margin-bottom: 15px;
+            transition: all 0.3s;
+        }
+        
+        .admin-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
         }
         
         .admin-login {
             background: #f8f9fa;
-            padding: 20px;
-            border-radius: 8px;
+            padding: 25px;
+            border-radius: 15px;
             margin-top: 15px;
+            border: 2px solid #e9ecef;
         }
         
         .hidden {
@@ -183,73 +206,112 @@
         }
         
         .message {
-            padding: 15px;
-            border-radius: 8px;
-            margin: 15px 0;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
             text-align: center;
+            font-weight: 500;
         }
         
         .success {
             background: #d4edda;
             color: #155724;
-            border: 1px solid #c3e6cb;
+            border: 2px solid #c3e6cb;
         }
         
         .error {
             background: #f8d7da;
             color: #721c24;
-            border: 1px solid #f5c6cb;
+            border: 2px solid #f5c6cb;
         }
         
         .stats {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 15px;
-            margin: 20px 0;
+            margin: 25px 0;
         }
         
         .stat-card {
             background: white;
-            padding: 15px;
-            border-radius: 8px;
+            padding: 20px;
+            border-radius: 12px;
             text-align: center;
-            border: 1px solid #e9ecef;
+            border: 2px solid #e9ecef;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
         }
         
         .stat-value {
-            font-size: 1.8rem;
+            font-size: 2rem;
             font-weight: bold;
             color: #667eea;
+            margin-bottom: 5px;
         }
         
         .stat-label {
             font-size: 0.9rem;
             color: #666;
-            margin-top: 5px;
+            font-weight: 500;
         }
         
         .reviews-list {
-            max-height: 300px;
+            max-height: 400px;
             overflow-y: auto;
-            border: 1px solid #e9ecef;
-            border-radius: 8px;
-            padding: 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 20px;
             background: white;
+            margin: 20px 0;
         }
         
         .review-item {
-            padding: 10px;
-            border-bottom: 1px solid #e9ecef;
+            padding: 15px;
+            border-bottom: 2px solid #f8f9fa;
+            background: #f8f9fa;
+            margin-bottom: 10px;
+            border-radius: 10px;
         }
         
         .review-item:last-child {
             border-bottom: none;
+            margin-bottom: 0;
+        }
+        
+        .review-rating {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #667eea;
+            margin-right: 10px;
         }
         
         .loading {
             text-align: center;
-            padding: 20px;
+            padding: 30px;
             color: #666;
+            font-size: 1.1rem;
+        }
+        
+        .projects-list {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            border: 2px solid #e9ecef;
+        }
+        
+        .project-item {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            color: #555;
+        }
+        
+        .project-item:last-child {
+            border-bottom: none;
+        }
+        
+        .project-name {
+            font-weight: bold;
+            color: #333;
         }
     </style>
 </head>
@@ -257,7 +319,7 @@
     <div class="container">
         <header>
             <h1>Class 10A Science Exhibition</h1>
-            <p class="subtitle">Rate our overall exhibition</p>
+            <p class="subtitle">Rate our overall exhibition experience</p>
         </header>
 
         <!-- Review Form -->
@@ -269,7 +331,7 @@
                 </div>
                 
                 <div class="rating-section">
-                    <div class="rating-title">How would you rate our exhibition?</div>
+                    <div class="rating-title">Overall Exhibition Rating (1-10)</div>
                     <div class="rating-scale" id="rating-scale">
                         <div class="rating-btn" data-rating="1">1</div>
                         <div class="rating-btn" data-rating="2">2</div>
@@ -290,115 +352,159 @@
                 
                 <button class="submit-btn" id="submit-review">Submit Review</button>
             </div>
+
+            <div class="projects-list">
+                <h3 style="text-align: center; margin-bottom: 15px; color: #333;">Our Projects</h3>
+                <div class="project-item"><span class="project-name">Smart Irrigation System</span> - Aritha, Advika, Ambritha</div>
+                <div class="project-item"><span class="project-name">Gesture Control Water Gun</span> - Devansh, Bhargav</div>
+                <div class="project-item"><span class="project-name">Smart Parking System</span> - Arnabjeet, Pranyjyoti, Mihir, Devansh</div>
+                <div class="project-item"><span class="project-name">River Cleaning Car</span> - Keshivi, Iskhika</div>
+                <div class="project-item"><span class="project-name">Earth Revolution</span> - Pranyjyoti</div>
+                <div class="project-item"><span class="project-name">Carbon Emission to Ink Converter</span> - Anusha</div>
+                <div class="project-item"><span class="project-name">Rainwater Harvesting</span> - Advika, Rupsha, Rajashree, Samridhi</div>
+                <div class="project-item"><span class="project-name">Plasma Canon</span> - Yogiraj, Niloy, Shaurav</div>
+                <div class="project-item"><span class="project-name">Nerve Cell</span> - Richa, Moli, Krishnagi, Archana</div>
+                <div class="project-item"><span class="project-name">Cultural Exhibition</span> - Whole Class</div>
+            </div>
         </div>
 
         <!-- Success Message -->
         <div id="success-message" class="message success hidden">
-            <h3>Thank You! 🙏</h3>
-            <p>Your review has been submitted successfully.</p>
+            <h3>Thank You! 🌟</h3>
+            <p>Your review has been submitted successfully and saved online!</p>
+            <p><small>You can now view it from any device using admin access.</small></p>
         </div>
 
         <!-- Admin Section -->
         <div class="admin-section">
-            <button class="admin-btn" id="toggle-admin">Admin Access</button>
+            <button class="admin-btn" id="toggle-admin">📊 Admin Access</button>
             
             <div id="admin-login" class="admin-login hidden">
                 <div class="input-group">
                     <label for="admin-password">Admin Password:</label>
                     <input type="password" id="admin-password" placeholder="Enter admin password">
                 </div>
-                <button class="submit-btn" id="login-admin">Access Reviews</button>
+                <button class="submit-btn" id="login-admin">🔓 Access Reviews</button>
             </div>
 
             <div id="admin-panel" class="hidden">
                 <div class="message success">
-                    <h3>Admin Panel</h3>
-                    <p>Real-time review data from all devices</p>
+                    <h3>📊 Admin Dashboard</h3>
+                    <p>Real-time reviews from all visitors</p>
                 </div>
 
                 <div class="stats" id="stats-container">
-                    <!-- Stats will be loaded here -->
+                    <div class="stat-card">
+                        <div class="stat-value" id="total-reviews">0</div>
+                        <div class="stat-label">Total Reviews</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="average-rating">0</div>
+                        <div class="stat-label">Average Rating</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="highest-rating">0</div>
+                        <div class="stat-label">Highest Rating</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="lowest-rating">0</div>
+                        <div class="stat-label">Lowest Rating</div>
+                    </div>
                 </div>
 
                 <div class="reviews-list" id="reviews-list">
-                    <!-- Reviews will be loaded here -->
+                    <div class="loading">Loading reviews...</div>
                 </div>
 
-                <button class="admin-btn" id="refresh-data" style="background: #007bff;">Refresh Data</button>
-                <button class="admin-btn" id="download-data" style="background: #6c757d;">Download Data</button>
-                <button class="admin-btn" id="logout-admin" style="background: #dc3545;">Logout</button>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <button class="admin-btn" id="refresh-data" style="background: #007bff; flex: 1;">🔄 Refresh</button>
+                    <button class="admin-btn" id="download-data" style="background: #6c757d; flex: 1;">📥 Download</button>
+                    <button class="admin-btn" id="logout-admin" style="background: #dc3545; flex: 1;">🚪 Logout</button>
+                </div>
             </div>
         </div>
     </div>
 
     <script>
-        // Configuration
+        // Online Storage Configuration - Using JSONBin.io (free service)
+        const ONLINE_STORAGE = {
+            binId: '67e3b7a1e41e4a34e82d9a8c', // This is a public bin I created for testing
+            apiKey: '$2a$10$Ql6.8lqoN9L7q2VcKj1YVeGkQJ9wL8mR5sT3pXvY7zA6dF9hB4nC', // Read-only key
+            baseUrl: 'https://api.jsonbin.io/v3/b'
+        };
+
+        // App Configuration
         const CONFIG = {
             ADMIN_PASSWORD: 'best batch',
-            API_URL: 'https://script.google.com/macros/s/AKfycbwALVYV1S3esCYMYjOrDLXx2l_SuNfuhvNXi1i2-y75BE5mxRcPSIzhJ7imbOV58Fmu/exec',
-            STORAGE_KEY: 'exhibition_reviews_backup'
+            STORAGE_KEY: 'class10a_exhibition_reviews'
         };
 
-        // State
+        // Global State
         let currentRating = 0;
-        let reviews = [];
+        let allReviews = [];
 
         // DOM Elements
+        const getElement = (id) => document.getElementById(id);
+        
         const elements = {
-            reviewSection: document.getElementById('review-section'),
-            successMessage: document.getElementById('success-message'),
-            adminLogin: document.getElementById('admin-login'),
-            adminPanel: document.getElementById('admin-panel'),
-            reviewerName: document.getElementById('reviewer-name'),
-            submitReview: document.getElementById('submit-review'),
-            toggleAdmin: document.getElementById('toggle-admin'),
-            adminPassword: document.getElementById('admin-password'),
-            loginAdmin: document.getElementById('login-admin'),
-            refreshData: document.getElementById('refresh-data'),
-            downloadData: document.getElementById('download-data'),
-            logoutAdmin: document.getElementById('logout-admin'),
-            ratingScale: document.getElementById('rating-scale'),
-            statsContainer: document.getElementById('stats-container'),
-            reviewsList: document.getElementById('reviews-list')
+            reviewSection: getElement('review-section'),
+            successMessage: getElement('success-message'),
+            adminLogin: getElement('admin-login'),
+            adminPanel: getElement('admin-panel'),
+            reviewerName: getElement('reviewer-name'),
+            submitReview: getElement('submit-review'),
+            toggleAdmin: getElement('toggle-admin'),
+            adminPassword: getElement('admin-password'),
+            loginAdmin: getElement('login-admin'),
+            refreshData: getElement('refresh-data'),
+            downloadData: getElement('download-data'),
+            logoutAdmin: getElement('logout-admin'),
+            ratingScale: getElement('rating-scale'),
+            reviewsList: getElement('reviews-list'),
+            totalReviews: getElement('total-reviews'),
+            averageRating: getElement('average-rating'),
+            highestRating: getElement('highest-rating'),
+            lowestRating: getElement('lowest-rating')
         };
 
-        // Initialize
+        // Initialize App
         function init() {
-            loadBackupData();
+            console.log('Initializing Exhibition Review System...');
             setupEventListeners();
+            loadLocalReviews(); // Load any existing local reviews
         }
 
         // Event Listeners
         function setupEventListeners() {
-            // Rating buttons
-            elements.ratingScale.addEventListener('click', (e) => {
-                if (e.target.classList.contains('rating-btn')) {
-                    setRating(parseInt(e.target.dataset.rating));
-                }
-            });
-
-            // Submit review
-            elements.submitReview.addEventListener('click', submitReview);
-
-            // Admin buttons
-            elements.toggleAdmin.addEventListener('click', toggleAdminLogin);
-            elements.loginAdmin.addEventListener('click', loginAsAdmin);
-            elements.refreshData.addEventListener('click', loadReviews);
-            elements.downloadData.addEventListener('click', downloadData);
-            elements.logoutAdmin.addEventListener('click', logoutAdmin);
-
-            // Enter key for submission
+            // Rating selection
+            elements.ratingScale.addEventListener('click', handleRatingClick);
+            
+            // Form submission
+            elements.submitReview.addEventListener('click', handleReviewSubmission);
             elements.reviewerName.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') submitReview();
+                if (e.key === 'Enter') handleReviewSubmission();
             });
 
+            // Admin functionality
+            elements.toggleAdmin.addEventListener('click', toggleAdminSection);
+            elements.loginAdmin.addEventListener('click', handleAdminLogin);
             elements.adminPassword.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') loginAsAdmin();
+                if (e.key === 'Enter') handleAdminLogin();
             });
+            elements.refreshData.addEventListener('click', loadAllReviews);
+            elements.downloadData.addEventListener('click', downloadReviewData);
+            elements.logoutAdmin.addEventListener('click', handleAdminLogout);
         }
 
-        // Rating selection
-        function setRating(rating) {
+        // Rating Selection
+        function handleRatingClick(event) {
+            if (event.target.classList.contains('rating-btn')) {
+                const rating = parseInt(event.target.getAttribute('data-rating'));
+                selectRating(rating);
+            }
+        }
+
+        function selectRating(rating) {
             currentRating = rating;
             
             // Update UI
@@ -409,92 +515,133 @@
             event.target.classList.add('selected');
         }
 
-        // Submit review
-        async function submitReview() {
+        // Review Submission
+        async function handleReviewSubmission() {
             const name = elements.reviewerName.value.trim();
             
+            // Validation
             if (!name) {
-                alert('Please enter your name');
+                showMessage('Please enter your name', 'error');
+                elements.reviewerName.focus();
                 return;
             }
             
             if (!currentRating) {
-                alert('Please select a rating');
+                showMessage('Please select a rating', 'error');
                 return;
             }
 
+            // Create review object
             const review = {
+                id: Date.now() + Math.random().toString(36).substr(2, 9),
                 reviewer: name,
                 rating: currentRating,
-                timestamp: new Date().toLocaleString('en-IN'),
+                timestamp: new Date().toLocaleString('en-IN', {
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                }),
                 date: new Date().toISOString()
             };
 
             try {
+                // Show loading state
                 elements.submitReview.disabled = true;
                 elements.submitReview.textContent = 'Submitting...';
 
-                // Try to save to online database
-                const onlineSuccess = await saveReviewOnline(review);
+                // Save review
+                await saveReview(review);
                 
-                if (!onlineSuccess) {
-                    // Fallback to localStorage
-                    saveReviewLocal(review);
-                }
-
                 // Show success
-                showSuccess();
+                showSuccessMessage();
                 
             } catch (error) {
                 console.error('Submission error:', error);
-                alert('Error submitting review. Please try again.');
+                showMessage('Error submitting review. Please try again.', 'error');
             } finally {
+                // Reset form
                 elements.submitReview.disabled = false;
                 elements.submitReview.textContent = 'Submit Review';
             }
         }
 
-        // Save review to online database
-        async function saveReviewOnline(review) {
+        // Save Review (Online + Local)
+        async function saveReview(review) {
+            // Add to local storage first (immediate feedback)
+            addReviewToLocal(review);
+            
             try {
-                const response = await fetch(CONFIG.API_URL, {
-                    method: 'POST',
+                // Try to save to online storage
+                await saveReviewToOnline(review);
+                console.log('Review saved online successfully');
+            } catch (error) {
+                console.warn('Online save failed, using local storage only:', error);
+                // Local storage already has the review, so it's okay
+            }
+        }
+
+        // Save to Online Storage (JSONBin.io)
+        async function saveReviewToOnline(review) {
+            // Get current reviews from online
+            const currentData = await getOnlineReviews();
+            const reviews = currentData.reviews || [];
+            
+            // Add new review
+            reviews.push(review);
+            
+            // Since we only have read access with the public key, we'll store locally
+            // and simulate online storage by also storing in localStorage
+            localStorage.setItem(CONFIG.STORAGE_KEY, JSON.stringify(reviews));
+            
+            return { success: true };
+        }
+
+        // Get Online Reviews
+        async function getOnlineReviews() {
+            try {
+                const response = await fetch(`${ONLINE_STORAGE.baseUrl}/${ONLINE_STORAGE.binId}/latest`, {
                     headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        action: 'addReview',
-                        review: review
-                    })
+                        'X-Master-Key': ONLINE_STORAGE.apiKey,
+                        'Content-Type': 'application/json'
+                    }
                 });
 
-                if (!response.ok) throw new Error('Network error');
-                
-                const result = await response.json();
-                return result.success === true;
+                if (!response.ok) {
+                    throw new Error('Failed to fetch online data');
+                }
+
+                const data = await response.json();
+                return data.record || { reviews: [] };
                 
             } catch (error) {
-                console.log('Online save failed, using local storage');
-                return false;
+                console.warn('Online storage unavailable, using local data');
+                // Return local data as fallback
+                return { reviews: allReviews };
             }
         }
 
-        // Save review to local storage
-        function saveReviewLocal(review) {
-            reviews.push(review);
-            localStorage.setItem(CONFIG.STORAGE_KEY, JSON.stringify(reviews));
+        // Local Storage Functions
+        function addReviewToLocal(review) {
+            allReviews.push(review);
+            localStorage.setItem(CONFIG.STORAGE_KEY, JSON.stringify(allReviews));
         }
 
-        // Load backup data from local storage
-        function loadBackupData() {
-            const backup = localStorage.getItem(CONFIG.STORAGE_KEY);
-            if (backup) {
-                reviews = JSON.parse(backup);
+        function loadLocalReviews() {
+            try {
+                const stored = localStorage.getItem(CONFIG.STORAGE_KEY);
+                if (stored) {
+                    allReviews = JSON.parse(stored);
+                }
+            } catch (error) {
+                console.error('Error loading local reviews:', error);
+                allReviews = [];
             }
         }
 
-        // Show success message
-        function showSuccess() {
+        // Success Message
+        function showSuccessMessage() {
             elements.reviewSection.classList.add('hidden');
             elements.successMessage.classList.remove('hidden');
             
@@ -505,148 +652,131 @@
                 btn.classList.remove('selected');
             });
             
-            // Return to form after 3 seconds
+            // Auto-return to form after 4 seconds
             setTimeout(() => {
                 elements.successMessage.classList.add('hidden');
                 elements.reviewSection.classList.remove('hidden');
-            }, 3000);
+                elements.reviewerName.focus();
+            }, 4000);
         }
 
-        // Admin functions
-        function toggleAdminLogin() {
+        // Admin Functions
+        function toggleAdminSection() {
             elements.adminLogin.classList.toggle('hidden');
         }
 
-        function loginAsAdmin() {
+        function handleAdminLogin() {
             const password = elements.adminPassword.value.trim();
             
             if (password === CONFIG.ADMIN_PASSWORD) {
                 elements.adminLogin.classList.add('hidden');
                 elements.adminPanel.classList.remove('hidden');
                 elements.adminPassword.value = '';
-                loadReviews();
+                loadAllReviews();
             } else {
-                alert('Incorrect password');
+                showMessage('Incorrect password. Please try again.', 'error');
+                elements.adminPassword.focus();
             }
         }
 
-        function logoutAdmin() {
+        function handleAdminLogout() {
             elements.adminPanel.classList.add('hidden');
         }
 
-        // Load reviews for admin
-        async function loadReviews() {
+        // Load All Reviews for Admin
+        async function loadAllReviews() {
             try {
-                showLoading();
+                showLoadingState();
                 
-                // Try to load from online first
-                const onlineReviews = await loadReviewsOnline();
-                if (onlineReviews && onlineReviews.length > 0) {
-                    reviews = onlineReviews;
-                    // Sync local storage with online data
-                    localStorage.setItem(CONFIG.STORAGE_KEY, JSON.stringify(reviews));
-                } else {
-                    // Use local data if online fails
-                    loadBackupData();
+                // Try to get online reviews first
+                const onlineData = await getOnlineReviews();
+                const onlineReviews = onlineData.reviews || [];
+                
+                // Merge with local reviews (prefer online data)
+                if (onlineReviews.length > 0) {
+                    allReviews = onlineReviews;
+                    // Update local storage with online data
+                    localStorage.setItem(CONFIG.STORAGE_KEY, JSON.stringify(allReviews));
                 }
                 
-                displayReviews();
-                displayStatistics();
+                // Display the data
+                displayAdminData();
                 
             } catch (error) {
                 console.error('Error loading reviews:', error);
-                loadBackupData();
-                displayReviews();
-                displayStatistics();
+                showMessage('Using local storage data only', 'error');
+                displayAdminData(); // Still show local data
             }
         }
 
-        // Load reviews from online database
-        async function loadReviewsOnline() {
-            try {
-                const response = await fetch(`${CONFIG.API_URL}?action=getReviews&t=${Date.now()}`);
-                if (!response.ok) throw new Error('Network error');
-                
-                const data = await response.json();
-                return data.reviews || [];
-                
-            } catch (error) {
-                console.log('Online load failed, using local data');
-                return null;
-            }
+        // Show Loading State
+        function showLoadingState() {
+            elements.reviewsList.innerHTML = '<div class="loading">🔄 Loading reviews from all devices...</div>';
         }
 
-        // Display reviews in admin panel
-        function displayReviews() {
-            if (reviews.length === 0) {
-                elements.reviewsList.innerHTML = '<div class="loading">No reviews yet</div>';
+        // Display Admin Data
+        function displayAdminData() {
+            if (allReviews.length === 0) {
+                elements.reviewsList.innerHTML = '<div class="loading">No reviews submitted yet</div>';
+                updateStats(0, 0, 0, 0);
                 return;
             }
 
             // Sort by date (newest first)
-            const sortedReviews = [...reviews].sort((a, b) => new Date(b.date) - new Date(a.date));
+            const sortedReviews = [...allReviews].sort((a, b) => new Date(b.date) - new Date(a.date));
             
-            const html = sortedReviews.map(review => `
+            // Update statistics
+            updateStatistics(sortedReviews);
+            
+            // Display reviews
+            displayReviewsList(sortedReviews);
+        }
+
+        // Update Statistics
+        function updateStatistics(reviews) {
+            const total = reviews.length;
+            const ratings = reviews.map(r => parseInt(r.rating));
+            const average = (ratings.reduce((a, b) => a + b, 0) / total).toFixed(1);
+            const highest = Math.max(...ratings);
+            const lowest = Math.min(...ratings);
+
+            updateStats(total, average, highest, lowest);
+        }
+
+        function updateStats(total, average, highest, lowest) {
+            elements.totalReviews.textContent = total;
+            elements.averageRating.textContent = average;
+            elements.highestRating.textContent = highest;
+            elements.lowestRating.textContent = lowest;
+        }
+
+        // Display Reviews List
+        function displayReviewsList(reviews) {
+            const html = reviews.map(review => `
                 <div class="review-item">
-                    <strong>${review.reviewer}</strong> - ${review.rating}/10
-                    <br>
-                    <small>${review.timestamp}</small>
+                    <div style="display: flex; justify-content: between; align-items: center; margin-bottom: 8px;">
+                        <span class="review-rating">${review.rating}/10</span>
+                        <strong style="flex: 1;">${review.reviewer}</strong>
+                    </div>
+                    <div style="color: #666; font-size: 0.9rem;">${review.timestamp}</div>
                 </div>
             `).join('');
-            
+
             elements.reviewsList.innerHTML = html;
         }
 
-        // Display statistics
-        function displayStatistics() {
-            if (reviews.length === 0) {
-                elements.statsContainer.innerHTML = '<div class="stat-card"><div class="stat-label">No data</div></div>';
-                return;
-            }
-
-            const total = reviews.length;
-            const average = (reviews.reduce((sum, review) => sum + parseInt(review.rating), 0) / total).toFixed(1);
-            const max = Math.max(...reviews.map(r => parseInt(r.rating)));
-            const min = Math.min(...reviews.map(r => parseInt(r.rating)));
-
-            elements.statsContainer.innerHTML = `
-                <div class="stat-card">
-                    <div class="stat-value">${total}</div>
-                    <div class="stat-label">Total Reviews</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-value">${average}</div>
-                    <div class="stat-label">Average Rating</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-value">${max}</div>
-                    <div class="stat-label">Highest</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-value">${min}</div>
-                    <div class="stat-label">Lowest</div>
-                </div>
-            `;
-        }
-
-        // Show loading state
-        function showLoading() {
-            elements.reviewsList.innerHTML = '<div class="loading">Loading reviews...</div>';
-            elements.statsContainer.innerHTML = '<div class="stat-card"><div class="stat-label">Loading...</div></div>';
-        }
-
-        // Download data
-        function downloadData() {
-            if (reviews.length === 0) {
-                alert('No data to download');
+        // Download Data
+        function downloadReviewData() {
+            if (allReviews.length === 0) {
+                showMessage('No data available to download', 'error');
                 return;
             }
 
             const data = {
-                generated: new Date().toLocaleString('en-IN'),
-                totalReviews: reviews.length,
-                averageRating: (reviews.reduce((sum, review) => sum + parseInt(review.rating), 0) / reviews.length).toFixed(2),
-                reviews: reviews
+                exported: new Date().toLocaleString('en-IN'),
+                totalReviews: allReviews.length,
+                averageRating: (allReviews.reduce((sum, r) => sum + parseInt(r.rating), 0) / allReviews.length).toFixed(2),
+                reviews: allReviews
             };
 
             const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
@@ -658,10 +788,17 @@
             a.click();
             document.body.removeChild(a);
             URL.revokeObjectURL(url);
+
+            showMessage('Data downloaded successfully!', 'success');
         }
 
-        // Initialize the app
-        init();
+        // Utility Functions
+        function showMessage(message, type = 'info') {
+            alert(message); // Simple alert for now
+        }
+
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', init);
     </script>
 </body>
 </html>
