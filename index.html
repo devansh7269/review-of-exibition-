@@ -13,280 +13,236 @@
         }
         
         body {
-            background-color: #f5f7fa;
-            color: #333;
-            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
         }
         
         .container {
-            max-width: 900px;
+            max-width: 500px;
             margin: 0 auto;
-            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
         
         header {
             text-align: center;
-            padding: 30px 0;
-            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
-            color: white;
-            border-radius: 10px;
             margin-bottom: 30px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
         
         h1 {
-            font-size: 2.5rem;
+            color: #333;
             margin-bottom: 10px;
+            font-size: 2rem;
         }
         
-        .project-card {
-            background: white;
+        .subtitle {
+            color: #666;
+            font-size: 1.1rem;
+        }
+        
+        .card {
+            background: #f8f9fa;
             border-radius: 10px;
             padding: 25px;
-            margin-bottom: 25px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-        
-        .project-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .project-title {
-            font-size: 1.5rem;
-            color: #2575fc;
-            margin-bottom: 15px;
-            text-align: center;
-        }
-        
-        .project-creators {
-            font-style: italic;
             margin-bottom: 20px;
-            color: #666;
-            text-align: center;
+            border: 1px solid #e9ecef;
         }
         
-        .review-section {
-            margin-top: 20px;
+        .input-group {
+            margin-bottom: 20px;
         }
         
-        .reviewer-name {
-            margin-bottom: 15px;
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 500;
         }
         
         input[type="text"] {
             width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 1rem;
-            margin-bottom: 15px;
+            padding: 12px 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
         }
         
-        .rating {
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .rating-section {
+            text-align: center;
+            margin: 30px 0;
+        }
+        
+        .rating-title {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .rating-scale {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .rating-btn {
+            width: 45px;
+            height: 45px;
+            border: 2px solid #667eea;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1.1rem;
+        }
+        
+        .rating-btn:hover {
+            background: #667eea;
+            color: white;
+            transform: scale(1.1);
+        }
+        
+        .rating-btn.selected {
+            background: #667eea;
+            color: white;
+            transform: scale(1.1);
+        }
+        
+        .rating-labels {
             display: flex;
             justify-content: space-between;
-            margin: 20px 0;
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 10px;
         }
         
-        .rating-option {
-            text-align: center;
-            cursor: pointer;
-            padding: 10px;
-            border-radius: 5px;
-            transition: all 0.3s ease;
-            flex: 1;
-            margin: 0 5px;
-        }
-        
-        .rating-option:hover {
-            background-color: #f0f5ff;
-        }
-        
-        .rating-option.selected {
-            background-color: #2575fc;
-            color: white;
-        }
-        
-        .rating-value {
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-        
-        .rating-label {
-            font-size: 0.8rem;
-        }
-        
-        button {
-            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border: none;
-            padding: 12px 25px;
-            border-radius: 5px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
             cursor: pointer;
-            font-size: 1rem;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            display: block;
-            margin: 20px auto;
-            width: 200px;
+            transition: transform 0.2s;
         }
         
-        button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        .submit-btn:hover {
+            transform: translateY(-2px);
         }
         
-        .thank-you {
-            text-align: center;
-            padding: 50px 20px;
-            display: none;
-        }
-        
-        .thank-you h2 {
-            color: #2575fc;
-            margin-bottom: 20px;
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
         }
         
         .admin-section {
-            margin-top: 40px;
-            padding: 20px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            margin-top: 30px;
+            border-top: 2px solid #e9ecef;
+            padding-top: 20px;
         }
         
-        .admin-section h3 {
-            color: #2575fc;
+        .admin-btn {
+            width: 100%;
+            padding: 12px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
             margin-bottom: 15px;
-            text-align: center;
         }
         
         .admin-login {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 20px;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 15px;
         }
         
-        .admin-content {
+        .hidden {
             display: none;
         }
         
-        .reviews-list {
-            max-height: 400px;
-            overflow-y: auto;
-            border: 1px solid #ddd;
-            border-radius: 5px;
+        .message {
             padding: 15px;
-            background: #f9f9f9;
-            margin-bottom: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            text-align: center;
         }
         
-        .review-item {
-            padding: 10px;
-            border-bottom: 1px solid #eee;
+        .success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
         }
         
-        .review-item:last-child {
-            border-bottom: none;
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
         }
         
-        .review-project {
-            font-weight: bold;
-            color: #2575fc;
-        }
-        
-        .stats-container {
+        .stats {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            grid-template-columns: repeat(2, 1fr);
             gap: 15px;
-            margin-top: 20px;
-            margin-bottom: 20px;
+            margin: 20px 0;
         }
         
         .stat-card {
             background: white;
             padding: 15px;
             border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
             text-align: center;
+            border: 1px solid #e9ecef;
         }
         
         .stat-value {
             font-size: 1.8rem;
             font-weight: bold;
-            color: #2575fc;
-            margin: 10px 0;
+            color: #667eea;
         }
         
         .stat-label {
             font-size: 0.9rem;
             color: #666;
+            margin-top: 5px;
         }
         
-        .quick-all-review {
-            display: none;
-        }
-        
-        .rating-scale-10 {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 5px;
-            margin: 20px 0;
-        }
-        
-        .rating-10-option {
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            background: #f0f0f0;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: bold;
-        }
-        
-        .rating-10-option:hover {
-            background: #e0e0e0;
-        }
-        
-        .rating-10-option.selected {
-            background: #2575fc;
-            color: white;
-            transform: scale(1.1);
-        }
-        
-        .project-quick-rating {
-            margin-bottom: 15px;
-            padding: 10px;
+        .reviews-list {
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid #e9ecef;
             border-radius: 8px;
-            background: #f9f9f9;
-        }
-        
-        .project-quick-name {
-            font-weight: bold;
-            margin-bottom: 10px;
-            text-align: center;
-        }
-        
-        .projects-list {
-            margin: 20px 0;
             padding: 15px;
-            background: #f9f9f9;
-            border-radius: 8px;
+            background: white;
         }
         
-        .project-item {
-            padding: 8px 0;
-            border-bottom: 1px solid #eee;
+        .review-item {
+            padding: 10px;
+            border-bottom: 1px solid #e9ecef;
         }
         
-        .project-item:last-child {
+        .review-item:last-child {
             border-bottom: none;
         }
         
@@ -295,261 +251,213 @@
             padding: 20px;
             color: #666;
         }
-        
-        .error {
-            text-align: center;
-            padding: 20px;
-            color: #e74c3c;
-            background: #ffeaea;
-            border-radius: 8px;
-            margin: 10px 0;
-        }
-        
-        .success {
-            text-align: center;
-            padding: 20px;
-            color: #27ae60;
-            background: #eaffea;
-            border-radius: 8px;
-            margin: 10px 0;
-        }
-        
-        .rating-explanation {
-            text-align: center;
-            margin: 10px 0;
-            color: #666;
-            font-size: 0.9rem;
-        }
-        
-        .admin-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 20px;
-        }
-        
-        footer {
-            text-align: center;
-            margin-top: 40px;
-            padding: 20px;
-            color: #666;
-            font-size: 0.9rem;
-        }
-        
-        @media (max-width: 768px) {
-            .rating-10-option {
-                width: 35px;
-                height: 35px;
-                font-size: 0.9rem;
-            }
-            
-            .admin-login {
-                flex-direction: column;
-            }
-            
-            .admin-buttons {
-                flex-direction: column;
-            }
-            
-            button {
-                width: 100%;
-                max-width: 300px;
-            }
-        }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
             <h1>Class 10A Science Exhibition</h1>
-            <p>Share your feedback on our innovative projects</p>
+            <p class="subtitle">Rate our overall exhibition</p>
         </header>
-        
-        <!-- Reviewer Name Section -->
-        <div class="project-card" id="reviewer-section">
-            <h2 class="project-title">Welcome!</h2>
-            <p>Please enter your name to give an overall rating for our class exhibition:</p>
-            <div class="review-section">
-                <div class="reviewer-name">
+
+        <!-- Review Form -->
+        <div id="review-section">
+            <div class="card">
+                <div class="input-group">
+                    <label for="reviewer-name">Your Name:</label>
                     <input type="text" id="reviewer-name" placeholder="Enter your full name">
                 </div>
                 
-                <button id="start-review">Start Review</button>
-            </div>
-        </div>
-        
-        <!-- Quick All Review Section -->
-        <div class="project-card quick-all-review" id="quick-all-review">
-            <h2 class="project-title">Rate Our Class Exhibition</h2>
-            <p>Please give an overall rating for Class 10A Science Exhibition on a scale of 1 to 10:</p>
-            
-            <div class="project-quick-rating">
-                <div class="rating-scale-10" id="overall-rating">
-                    <div class="rating-10-option" data-value="1">1</div>
-                    <div class="rating-10-option" data-value="2">2</div>
-                    <div class="rating-10-option" data-value="3">3</div>
-                    <div class="rating-10-option" data-value="4">4</div>
-                    <div class="rating-10-option" data-value="5">5</div>
-                    <div class="rating-10-option" data-value="6">6</div>
-                    <div class="rating-10-option" data-value="7">7</div>
-                    <div class="rating-10-option" data-value="8">8</div>
-                    <div class="rating-10-option" data-value="9">9</div>
-                    <div class="rating-10-option" data-value="10">10</div>
+                <div class="rating-section">
+                    <div class="rating-title">How would you rate our exhibition?</div>
+                    <div class="rating-scale" id="rating-scale">
+                        <div class="rating-btn" data-rating="1">1</div>
+                        <div class="rating-btn" data-rating="2">2</div>
+                        <div class="rating-btn" data-rating="3">3</div>
+                        <div class="rating-btn" data-rating="4">4</div>
+                        <div class="rating-btn" data-rating="5">5</div>
+                        <div class="rating-btn" data-rating="6">6</div>
+                        <div class="rating-btn" data-rating="7">7</div>
+                        <div class="rating-btn" data-rating="8">8</div>
+                        <div class="rating-btn" data-rating="9">9</div>
+                        <div class="rating-btn" data-rating="10">10</div>
+                    </div>
+                    <div class="rating-labels">
+                        <span>Poor</span>
+                        <span>Excellent</span>
+                    </div>
                 </div>
-                <div class="rating-explanation">
-                    <small>1 = Poor, 5 = Average, 10 = Excellent</small>
-                </div>
+                
+                <button class="submit-btn" id="submit-review">Submit Review</button>
             </div>
-            
-            <div class="projects-list">
-                <h3 style="text-align: center; margin-bottom: 15px;">Our Projects</h3>
-                <div class="project-item"><strong>Smart Irrigation System</strong> - Aritha, Advika, Ambritha</div>
-                <div class="project-item"><strong>Gesture Control Water Gun</strong> - Devansh, Bhargav</div>
-                <div class="project-item"><strong>Smart Parking System</strong> - Arnabjeet, Pranyjyoti, Mihir, Devansh</div>
-                <div class="project-item"><strong>River Cleaning Car</strong> - Keshivi, Iskhika</div>
-                <div class="project-item"><strong>Earth Revolution</strong> - Pranyjyoti</div>
-                <div class="project-item"><strong>Carbon Emission to Ink Converter</strong> - Anusha</div>
-                <div class="project-item"><strong>Rainwater Harvesting</strong> - Advika, Rupsha, Rajashree, Samridhi</div>
-                <div class="project-item"><strong>Plasma Canon</strong> - Yogiraj, Niloy, Shaurav</div>
-                <div class="project-item"><strong>Nerve Cell</strong> - Richa, Moli, Krishnagi, Archana</div>
-                <div class="project-item"><strong>Cultural Exhibition</strong> - Whole Class</div>
-            </div>
-            
-            <button id="submit-quick-all">Submit Review</button>
         </div>
-        
-        <!-- Thank You Message -->
-        <div class="thank-you" id="thank-you">
-            <h2>Thank You for Visiting!</h2>
-            <p>Your feedback has been recorded. We appreciate your time and valuable input!</p>
+
+        <!-- Success Message -->
+        <div id="success-message" class="message success hidden">
+            <h3>Thank You! 🙏</h3>
+            <p>Your review has been submitted successfully.</p>
         </div>
-        
+
         <!-- Admin Section -->
         <div class="admin-section">
-            <h3>Admin Access</h3>
-            <div class="admin-login">
-                <input type="password" id="admin-password" placeholder="Enter admin password">
-                <button id="admin-login">Access Reviews</button>
-            </div>
-            <div class="admin-content" id="admin-content">
-                <div class="loading" id="admin-loading">Loading reviews from online database...</div>
-                <div class="error" id="admin-error" style="display: none;"></div>
-                <div id="admin-data" style="display: none;">
-                    <h4>All Reviews</h4>
-                    <div class="stats-container" id="stats-container">
-                        <!-- Statistics will be displayed here -->
-                    </div>
-                    <div class="reviews-list" id="reviews-list">
-                        <!-- Reviews will be displayed here -->
-                    </div>
-                    <div class="admin-buttons">
-                        <button id="download-reviews">Download Reviews as Text File</button>
-                        <button id="refresh-reviews">Refresh Reviews</button>
-                    </div>
+            <button class="admin-btn" id="toggle-admin">Admin Access</button>
+            
+            <div id="admin-login" class="admin-login hidden">
+                <div class="input-group">
+                    <label for="admin-password">Admin Password:</label>
+                    <input type="password" id="admin-password" placeholder="Enter admin password">
                 </div>
+                <button class="submit-btn" id="login-admin">Access Reviews</button>
+            </div>
+
+            <div id="admin-panel" class="hidden">
+                <div class="message success">
+                    <h3>Admin Panel</h3>
+                    <p>Real-time review data from all devices</p>
+                </div>
+
+                <div class="stats" id="stats-container">
+                    <!-- Stats will be loaded here -->
+                </div>
+
+                <div class="reviews-list" id="reviews-list">
+                    <!-- Reviews will be loaded here -->
+                </div>
+
+                <button class="admin-btn" id="refresh-data" style="background: #007bff;">Refresh Data</button>
+                <button class="admin-btn" id="download-data" style="background: #6c757d;">Download Data</button>
+                <button class="admin-btn" id="logout-admin" style="background: #dc3545;">Logout</button>
             </div>
         </div>
-        
-        <footer>
-            <p>Class 10A Science Exhibition | All Rights Reserved</p>
-        </footer>
     </div>
 
     <script>
-        // Your Google Apps Script Web App URL
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwALVYV1S3esCYMYjOrDLXx2l_SuNfuhvNXi1i2-y75BE5mxRcPSIzhJ7imbOV58Fmu/exec';
-        
-        // Store reviews
-        let reviews = [];
-        let currentReviewer = "";
+        // Configuration
+        const CONFIG = {
+            ADMIN_PASSWORD: 'best batch',
+            API_URL: 'https://script.google.com/macros/s/AKfycbwALVYV1S3esCYMYjOrDLXx2l_SuNfuhvNXi1i2-y75BE5mxRcPSIzhJ7imbOV58Fmu/exec',
+            STORAGE_KEY: 'exhibition_reviews_backup'
+        };
+
+        // State
         let currentRating = 0;
-        
-        // DOM elements
-        const reviewerSection = document.getElementById('reviewer-section');
-        const thankYouSection = document.getElementById('thank-you');
-        const startReviewBtn = document.getElementById('start-review');
-        const adminLoginBtn = document.getElementById('admin-login');
-        const adminContent = document.getElementById('admin-content');
-        const adminLoading = document.getElementById('admin-loading');
-        const adminError = document.getElementById('admin-error');
-        const adminData = document.getElementById('admin-data');
-        const reviewsList = document.getElementById('reviews-list');
-        const downloadBtn = document.getElementById('download-reviews');
-        const refreshBtn = document.getElementById('refresh-reviews');
-        const quickAllReviewSection = document.getElementById('quick-all-review');
-        const submitQuickAllBtn = document.getElementById('submit-quick-all');
-        const rating10Options = document.querySelectorAll('.rating-10-option');
-        const statsContainer = document.getElementById('stats-container');
-        
-        // Start review when name is entered
-        startReviewBtn.addEventListener('click', () => {
-            const reviewerName = document.getElementById('reviewer-name').value.trim();
-            if (reviewerName) {
-                currentReviewer = reviewerName;
-                reviewerSection.style.display = 'none';
-                quickAllReviewSection.style.display = 'block';
-            } else {
-                alert('Please enter your name to continue.');
-            }
-        });
-        
-        // Handle rating selection
-        rating10Options.forEach(option => {
-            option.addEventListener('click', function() {
-                // Remove selected class from all options
-                rating10Options.forEach(opt => opt.classList.remove('selected'));
-                
-                // Add selected class to clicked option
-                this.classList.add('selected');
-                
-                // Store the rating
-                currentRating = this.getAttribute('data-value');
+        let reviews = [];
+
+        // DOM Elements
+        const elements = {
+            reviewSection: document.getElementById('review-section'),
+            successMessage: document.getElementById('success-message'),
+            adminLogin: document.getElementById('admin-login'),
+            adminPanel: document.getElementById('admin-panel'),
+            reviewerName: document.getElementById('reviewer-name'),
+            submitReview: document.getElementById('submit-review'),
+            toggleAdmin: document.getElementById('toggle-admin'),
+            adminPassword: document.getElementById('admin-password'),
+            loginAdmin: document.getElementById('login-admin'),
+            refreshData: document.getElementById('refresh-data'),
+            downloadData: document.getElementById('download-data'),
+            logoutAdmin: document.getElementById('logout-admin'),
+            ratingScale: document.getElementById('rating-scale'),
+            statsContainer: document.getElementById('stats-container'),
+            reviewsList: document.getElementById('reviews-list')
+        };
+
+        // Initialize
+        function init() {
+            loadBackupData();
+            setupEventListeners();
+        }
+
+        // Event Listeners
+        function setupEventListeners() {
+            // Rating buttons
+            elements.ratingScale.addEventListener('click', (e) => {
+                if (e.target.classList.contains('rating-btn')) {
+                    setRating(parseInt(e.target.dataset.rating));
+                }
             });
-        });
-        
+
+            // Submit review
+            elements.submitReview.addEventListener('click', submitReview);
+
+            // Admin buttons
+            elements.toggleAdmin.addEventListener('click', toggleAdminLogin);
+            elements.loginAdmin.addEventListener('click', loginAsAdmin);
+            elements.refreshData.addEventListener('click', loadReviews);
+            elements.downloadData.addEventListener('click', downloadData);
+            elements.logoutAdmin.addEventListener('click', logoutAdmin);
+
+            // Enter key for submission
+            elements.reviewerName.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') submitReview();
+            });
+
+            elements.adminPassword.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') loginAsAdmin();
+            });
+        }
+
+        // Rating selection
+        function setRating(rating) {
+            currentRating = rating;
+            
+            // Update UI
+            document.querySelectorAll('.rating-btn').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            
+            event.target.classList.add('selected');
+        }
+
         // Submit review
-        submitQuickAllBtn.addEventListener('click', async function() {
-            if (!currentRating) {
-                alert('Please select a rating before submitting.');
+        async function submitReview() {
+            const name = elements.reviewerName.value.trim();
+            
+            if (!name) {
+                alert('Please enter your name');
                 return;
             }
             
-            // Create review object
-            const review = {
-                reviewer: currentReviewer,
-                rating: currentRating,
-                timestamp: new Date().toLocaleString()
-            };
-            
-            try {
-                // Show loading state
-                submitQuickAllBtn.textContent = 'Submitting...';
-                submitQuickAllBtn.disabled = true;
-                
-                // Save to online database
-                const result = await saveReviewToOnlineDB(review);
-                
-                if (result.success) {
-                    // Hide review section and show thank you
-                    quickAllReviewSection.style.display = 'none';
-                    thankYouSection.style.display = 'block';
-                } else {
-                    throw new Error(result.error || 'Failed to submit review');
-                }
-            } catch (error) {
-                alert('Error submitting review. Please try again.');
-                console.error('Submission error:', error);
-            } finally {
-                // Reset button state
-                submitQuickAllBtn.textContent = 'Submit Review';
-                submitQuickAllBtn.disabled = false;
+            if (!currentRating) {
+                alert('Please select a rating');
+                return;
             }
-        });
-        
-        // Save review to online database
-        async function saveReviewToOnlineDB(review) {
+
+            const review = {
+                reviewer: name,
+                rating: currentRating,
+                timestamp: new Date().toLocaleString('en-IN'),
+                date: new Date().toISOString()
+            };
+
             try {
-                const response = await fetch(SCRIPT_URL, {
+                elements.submitReview.disabled = true;
+                elements.submitReview.textContent = 'Submitting...';
+
+                // Try to save to online database
+                const onlineSuccess = await saveReviewOnline(review);
+                
+                if (!onlineSuccess) {
+                    // Fallback to localStorage
+                    saveReviewLocal(review);
+                }
+
+                // Show success
+                showSuccess();
+                
+            } catch (error) {
+                console.error('Submission error:', error);
+                alert('Error submitting review. Please try again.');
+            } finally {
+                elements.submitReview.disabled = false;
+                elements.submitReview.textContent = 'Submit Review';
+            }
+        }
+
+        // Save review to online database
+        async function saveReviewOnline(review) {
+            try {
+                const response = await fetch(CONFIG.API_URL, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -559,227 +467,201 @@
                         review: review
                     })
                 });
+
+                if (!response.ok) throw new Error('Network error');
                 
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
+                const result = await response.json();
+                return result.success === true;
                 
-                const data = await response.json();
-                return data;
             } catch (error) {
-                console.error('Error saving to online DB:', error);
-                // Fallback to localStorage
-                const existingReviews = JSON.parse(localStorage.getItem('exhibitionReviews') || '[]');
-                existingReviews.push(review);
-                localStorage.setItem('exhibitionReviews', JSON.stringify(existingReviews));
-                return { success: true, message: 'Saved locally (online storage failed)' };
+                console.log('Online save failed, using local storage');
+                return false;
             }
         }
-        
-        // Load reviews from online database
-        async function loadReviewsFromOnlineDB() {
+
+        // Save review to local storage
+        function saveReviewLocal(review) {
+            reviews.push(review);
+            localStorage.setItem(CONFIG.STORAGE_KEY, JSON.stringify(reviews));
+        }
+
+        // Load backup data from local storage
+        function loadBackupData() {
+            const backup = localStorage.getItem(CONFIG.STORAGE_KEY);
+            if (backup) {
+                reviews = JSON.parse(backup);
+            }
+        }
+
+        // Show success message
+        function showSuccess() {
+            elements.reviewSection.classList.add('hidden');
+            elements.successMessage.classList.remove('hidden');
+            
+            // Reset form
+            elements.reviewerName.value = '';
+            currentRating = 0;
+            document.querySelectorAll('.rating-btn').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            
+            // Return to form after 3 seconds
+            setTimeout(() => {
+                elements.successMessage.classList.add('hidden');
+                elements.reviewSection.classList.remove('hidden');
+            }, 3000);
+        }
+
+        // Admin functions
+        function toggleAdminLogin() {
+            elements.adminLogin.classList.toggle('hidden');
+        }
+
+        function loginAsAdmin() {
+            const password = elements.adminPassword.value.trim();
+            
+            if (password === CONFIG.ADMIN_PASSWORD) {
+                elements.adminLogin.classList.add('hidden');
+                elements.adminPanel.classList.remove('hidden');
+                elements.adminPassword.value = '';
+                loadReviews();
+            } else {
+                alert('Incorrect password');
+            }
+        }
+
+        function logoutAdmin() {
+            elements.adminPanel.classList.add('hidden');
+        }
+
+        // Load reviews for admin
+        async function loadReviews() {
             try {
-                adminLoading.style.display = 'block';
-                adminError.style.display = 'none';
-                adminData.style.display = 'none';
+                showLoading();
                 
-                const response = await fetch(`${SCRIPT_URL}?action=getReviews`);
-                if (!response.ok) {
-                    throw new Error('Failed to load reviews from server');
+                // Try to load from online first
+                const onlineReviews = await loadReviewsOnline();
+                if (onlineReviews && onlineReviews.length > 0) {
+                    reviews = onlineReviews;
+                    // Sync local storage with online data
+                    localStorage.setItem(CONFIG.STORAGE_KEY, JSON.stringify(reviews));
+                } else {
+                    // Use local data if online fails
+                    loadBackupData();
                 }
                 
-                const data = await response.json();
-                
-                if (data.error) {
-                    throw new Error(data.error);
-                }
-                
-                reviews = data.reviews || [];
-                
-                // If no reviews from online, check localStorage
-                if (reviews.length === 0) {
-                    const storedReviews = localStorage.getItem('exhibitionReviews');
-                    if (storedReviews) {
-                        reviews = JSON.parse(storedReviews);
-                    }
-                }
-                
-                adminLoading.style.display = 'none';
-                adminData.style.display = 'block';
                 displayReviews();
                 displayStatistics();
+                
             } catch (error) {
                 console.error('Error loading reviews:', error);
-                adminLoading.style.display = 'none';
-                adminError.style.display = 'block';
-                adminError.textContent = 'Error loading reviews: ' + error.message + '. Trying local storage...';
-                
-                // Fallback to localStorage
-                const storedReviews = localStorage.getItem('exhibitionReviews');
-                if (storedReviews) {
-                    reviews = JSON.parse(storedReviews);
-                    adminError.style.display = 'none';
-                    adminData.style.display = 'block';
-                    displayReviews();
-                    displayStatistics();
-                }
+                loadBackupData();
+                displayReviews();
+                displayStatistics();
             }
         }
-        
-        // Admin login
-        adminLoginBtn.addEventListener('click', () => {
-            const password = document.getElementById('admin-password').value;
-            if (password === 'best batch') {
-                adminContent.style.display = 'block';
-                loadReviewsFromOnlineDB();
-            } else {
-                alert('Incorrect password. Please try again.');
+
+        // Load reviews from online database
+        async function loadReviewsOnline() {
+            try {
+                const response = await fetch(`${CONFIG.API_URL}?action=getReviews&t=${Date.now()}`);
+                if (!response.ok) throw new Error('Network error');
+                
+                const data = await response.json();
+                return data.reviews || [];
+                
+            } catch (error) {
+                console.log('Online load failed, using local data');
+                return null;
             }
-        });
-        
-        // Display reviews in admin section
+        }
+
+        // Display reviews in admin panel
         function displayReviews() {
             if (reviews.length === 0) {
-                reviewsList.innerHTML = '<div class="review-item"><p>No reviews yet.</p></div>';
+                elements.reviewsList.innerHTML = '<div class="loading">No reviews yet</div>';
                 return;
             }
+
+            // Sort by date (newest first)
+            const sortedReviews = [...reviews].sort((a, b) => new Date(b.date) - new Date(a.date));
             
-            let html = '';
-            // Sort reviews by timestamp (newest first)
-            const sortedReviews = [...reviews].sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+            const html = sortedReviews.map(review => `
+                <div class="review-item">
+                    <strong>${review.reviewer}</strong> - ${review.rating}/10
+                    <br>
+                    <small>${review.timestamp}</small>
+                </div>
+            `).join('');
             
-            sortedReviews.forEach((review, index) => {
-                html += `<div class="review-item">
-                    <p><strong>Reviewer:</strong> ${review.reviewer}</p>
-                    <p><strong>Rating:</strong> ${review.rating}/10</p>
-                    <p><strong>Date:</strong> ${review.timestamp}</p>
-                    ${index < sortedReviews.length - 1 ? '<hr>' : ''}
-                </div>`;
-            });
-            
-            reviewsList.innerHTML = html;
+            elements.reviewsList.innerHTML = html;
         }
-        
-        // Display statistics in admin section
+
+        // Display statistics
         function displayStatistics() {
             if (reviews.length === 0) {
-                statsContainer.innerHTML = '<div class="stat-card"><div class="stat-label">No reviews yet</div></div>';
+                elements.statsContainer.innerHTML = '<div class="stat-card"><div class="stat-label">No data</div></div>';
                 return;
             }
-            
-            // Calculate average rating
-            const totalRating = reviews.reduce((sum, review) => sum + parseInt(review.rating), 0);
-            const averageRating = (totalRating / reviews.length).toFixed(2);
-            
-            // Calculate rating distribution
-            const ratingCounts = {1:0, 2:0, 3:0, 4:0, 5:0, 6:0, 7:0, 8:0, 9:0, 10:0};
-            reviews.forEach(review => {
-                const rating = parseInt(review.rating);
-                if (rating >= 1 && rating <= 10) {
-                    ratingCounts[rating]++;
-                }
-            });
-            
-            // Find highest and lowest ratings
-            const ratings = reviews.map(r => parseInt(r.rating));
-            const highestRating = Math.max(...ratings);
-            const lowestRating = Math.min(...ratings);
-            
-            // Display statistics
-            let statsHTML = `
+
+            const total = reviews.length;
+            const average = (reviews.reduce((sum, review) => sum + parseInt(review.rating), 0) / total).toFixed(1);
+            const max = Math.max(...reviews.map(r => parseInt(r.rating)));
+            const min = Math.min(...reviews.map(r => parseInt(r.rating)));
+
+            elements.statsContainer.innerHTML = `
                 <div class="stat-card">
+                    <div class="stat-value">${total}</div>
                     <div class="stat-label">Total Reviews</div>
-                    <div class="stat-value">${reviews.length}</div>
                 </div>
                 <div class="stat-card">
+                    <div class="stat-value">${average}</div>
                     <div class="stat-label">Average Rating</div>
-                    <div class="stat-value">${averageRating}</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-label">Highest Rating</div>
-                    <div class="stat-value">${highestRating}</div>
+                    <div class="stat-value">${max}</div>
+                    <div class="stat-label">Highest</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-label">Lowest Rating</div>
-                    <div class="stat-value">${lowestRating}</div>
+                    <div class="stat-value">${min}</div>
+                    <div class="stat-label">Lowest</div>
                 </div>
             `;
-            
-            // Add rating distribution for top ratings
-            for (let i = 1; i <= 10; i++) {
-                const count = ratingCounts[i];
-                if (count > 0) {
-                    const percentage = reviews.length > 0 ? ((count / reviews.length) * 100).toFixed(1) : 0;
-                    statsHTML += `
-                        <div class="stat-card">
-                            <div class="stat-label">Rating ${i}</div>
-                            <div class="stat-value">${count}</div>
-                            <div class="stat-label">${percentage}%</div>
-                        </div>
-                    `;
-                }
-            }
-            
-            statsContainer.innerHTML = statsHTML;
         }
-        
-        // Download reviews as text file
-        downloadBtn.addEventListener('click', () => {
+
+        // Show loading state
+        function showLoading() {
+            elements.reviewsList.innerHTML = '<div class="loading">Loading reviews...</div>';
+            elements.statsContainer.innerHTML = '<div class="stat-card"><div class="stat-label">Loading...</div></div>';
+        }
+
+        // Download data
+        function downloadData() {
             if (reviews.length === 0) {
-                alert('No reviews to download.');
+                alert('No data to download');
                 return;
             }
-            
-            let textContent = 'CLASS 10A SCIENCE EXHIBITION REVIEWS\n';
-            textContent += '=====================================\n\n';
-            textContent += `Total Reviews: ${reviews.length}\n\n`;
-            
-            // Calculate average
-            const totalRating = reviews.reduce((sum, review) => sum + parseInt(review.rating), 0);
-            const averageRating = (totalRating / reviews.length).toFixed(2);
-            textContent += `Average Rating: ${averageRating}/10\n\n`;
-            
-            textContent += 'INDIVIDUAL REVIEWS:\n';
-            textContent += '===================\n\n';
-            
-            // Sort by timestamp (newest first)
-            const sortedReviews = [...reviews].sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
-            
-            sortedReviews.forEach((review, index) => {
-                textContent += `Review ${index + 1}:\n`;
-                textContent += `  Reviewer: ${review.reviewer}\n`;
-                textContent += `  Rating: ${review.rating}/10\n`;
-                textContent += `  Date: ${review.timestamp}\n`;
-                textContent += `-------------------------------------\n\n`;
-            });
-            
-            const blob = new Blob([textContent], { type: 'text/plain' });
+
+            const data = {
+                generated: new Date().toLocaleString('en-IN'),
+                totalReviews: reviews.length,
+                averageRating: (reviews.reduce((sum, review) => sum + parseInt(review.rating), 0) / reviews.length).toFixed(2),
+                reviews: reviews
+            };
+
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = 'class10a_exhibition_reviews.txt';
+            a.download = `class10a_reviews_${new Date().toISOString().split('T')[0]}.json`;
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
             URL.revokeObjectURL(url);
-        });
-        
-        // Refresh reviews button
-        refreshBtn.addEventListener('click', () => {
-            loadReviewsFromOnlineDB();
-        });
-        
-        // Initialize
-        window.addEventListener('DOMContentLoaded', () => {
-            // Check if we have any existing reviews in localStorage for fallback
-            const storedReviews = localStorage.getItem('exhibitionReviews');
-            if (storedReviews) {
-                reviews = JSON.parse(storedReviews);
-            }
-            
-            // Auto-focus on name input
-            document.getElementById('reviewer-name').focus();
-        });
+        }
+
+        // Initialize the app
+        init();
     </script>
 </body>
 </html>
