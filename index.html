@@ -338,6 +338,52 @@
             font-size: 0.9rem;
             color: #666;
         }
+        
+        .quick-all-review {
+            display: none;
+        }
+        
+        .rating-scale-10 {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 5px;
+            margin: 20px 0;
+        }
+        
+        .rating-10-option {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: #f0f0f0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+        
+        .rating-10-option:hover {
+            background: #e0e0e0;
+        }
+        
+        .rating-10-option.selected {
+            background: #2575fc;
+            color: white;
+        }
+        
+        .project-quick-rating {
+            margin-bottom: 15px;
+            padding: 10px;
+            border-radius: 8px;
+            background: #f9f9f9;
+        }
+        
+        .project-quick-name {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
@@ -348,7 +394,7 @@
         </header>
         
         <div class="progress-container">
-            <div class="progress-text">Review Progress: <span id="progress-text">0/9</span></div>
+            <div class="progress-text">Review Progress: <span id="progress-text">0/10</span></div>
             <div class="progress-bar">
                 <div class="progress" id="progress-bar"></div>
             </div>
@@ -372,438 +418,191 @@
                         <h3>Quick Review</h3>
                         <p>Rate all projects at once</p>
                     </div>
+                    <div class="review-option-btn" id="quick-all-review-btn">
+                        <h3>All Projects at Once</h3>
+                        <p>Rate all projects on a 1-10 scale</p>
+                    </div>
                 </div>
                 
                 <button id="start-review" style="display: none;">Start Review</button>
             </div>
         </div>
         
-        <!-- Collective Review Section -->
-        <div class="project-card collective-review" id="collective-review">
-            <h2 class="project-title">Quick Review - All Projects</h2>
-            <p>Please rate all projects below:</p>
+        <!-- Quick All Review Section -->
+        <div class="project-card quick-all-review" id="quick-all-review">
+            <h2 class="project-title">Rate All Projects</h2>
+            <p>Please rate all projects on a scale of 1 to 10:</p>
             
-            <div class="project-rating-row">
-                <div class="project-name">
-                    <strong>Smart Irrigation System</strong>
-                    <div class="project-creators">Aritha, Advika, Ambritha</div>
-                </div>
-                <div class="collective-rating">
-                    <div class="collective-rating-option" data-value="1">1</div>
-                    <div class="collective-rating-option" data-value="2">2</div>
-                    <div class="collective-rating-option" data-value="3">3</div>
-                    <div class="collective-rating-option" data-value="4">4</div>
-                    <div class="collective-rating-option" data-value="5">5</div>
-                </div>
-            </div>
-            
-            <div class="project-rating-row">
-                <div class="project-name">
-                    <strong>Gesture Control Water Gun</strong>
-                    <div class="project-creators">Devansh, Bhargav</div>
-                </div>
-                <div class="collective-rating">
-                    <div class="collective-rating-option" data-value="1">1</div>
-                    <div class="collective-rating-option" data-value="2">2</div>
-                    <div class="collective-rating-option" data-value="3">3</div>
-                    <div class="collective-rating-option" data-value="4">4</div>
-                    <div class="collective-rating-option" data-value="5">5</div>
+            <div class="project-quick-rating">
+                <div class="project-quick-name">Smart Irrigation System</div>
+                <div>Created by: Aritha, Advika, Ambritha</div>
+                <div class="rating-scale-10">
+                    <div class="rating-10-option" data-value="1">1</div>
+                    <div class="rating-10-option" data-value="2">2</div>
+                    <div class="rating-10-option" data-value="3">3</div>
+                    <div class="rating-10-option" data-value="4">4</div>
+                    <div class="rating-10-option" data-value="5">5</div>
+                    <div class="rating-10-option" data-value="6">6</div>
+                    <div class="rating-10-option" data-value="7">7</div>
+                    <div class="rating-10-option" data-value="8">8</div>
+                    <div class="rating-10-option" data-value="9">9</div>
+                    <div class="rating-10-option" data-value="10">10</div>
                 </div>
             </div>
             
-            <div class="project-rating-row">
-                <div class="project-name">
-                    <strong>Smart Parking System</strong>
-                    <div class="project-creators">Arnabjeet, Pranyjyoti, Mihir, Devansh</div>
-                </div>
-                <div class="collective-rating">
-                    <div class="collective-rating-option" data-value="1">1</div>
-                    <div class="collective-rating-option" data-value="2">2</div>
-                    <div class="collective-rating-option" data-value="3">3</div>
-                    <div class="collective-rating-option" data-value="4">4</div>
-                    <div class="collective-rating-option" data-value="5">5</div>
-                </div>
-            </div>
-            
-            <div class="project-rating-row">
-                <div class="project-name">
-                    <strong>River Cleaning Car</strong>
-                    <div class="project-creators">Keshivi, Iskhika</div>
-                </div>
-                <div class="collective-rating">
-                    <div class="collective-rating-option" data-value="1">1</div>
-                    <div class="collective-rating-option" data-value="2">2</div>
-                    <div class="collective-rating-option" data-value="3">3</div>
-                    <div class="collective-rating-option" data-value="4">4</div>
-                    <div class="collective-rating-option" data-value="5">5</div>
+            <div class="project-quick-rating">
+                <div class="project-quick-name">Gesture Control Water Gun</div>
+                <div>Created by: Devansh, Bhargav</div>
+                <div class="rating-scale-10">
+                    <div class="rating-10-option" data-value="1">1</div>
+                    <div class="rating-10-option" data-value="2">2</div>
+                    <div class="rating-10-option" data-value="3">3</div>
+                    <div class="rating-10-option" data-value="4">4</div>
+                    <div class="rating-10-option" data-value="5">5</div>
+                    <div class="rating-10-option" data-value="6">6</div>
+                    <div class="rating-10-option" data-value="7">7</div>
+                    <div class="rating-10-option" data-value="8">8</div>
+                    <div class="rating-10-option" data-value="9">9</div>
+                    <div class="rating-10-option" data-value="10">10</div>
                 </div>
             </div>
             
-            <div class="project-rating-row">
-                <div class="project-name">
-                    <strong>Earth Revolution</strong>
-                    <div class="project-creators">Pranyjyoti</div>
-                </div>
-                <div class="collective-rating">
-                    <div class="collective-rating-option" data-value="1">1</div>
-                    <div class="collective-rating-option" data-value="2">2</div>
-                    <div class="collective-rating-option" data-value="3">3</div>
-                    <div class="collective-rating-option" data-value="4">4</div>
-                    <div class="collective-rating-option" data-value="5">5</div>
-                </div>
-            </div>
-            
-            <div class="project-rating-row">
-                <div class="project-name">
-                    <strong>Carbon Emission to Ink Converter</strong>
-                    <div class="project-creators">Anusha</div>
-                </div>
-                <div class="collective-rating">
-                    <div class="collective-rating-option" data-value="1">1</div>
-                    <div class="collective-rating-option" data-value="2">2</div>
-                    <div class="collective-rating-option" data-value="3">3</div>
-                    <div class="collective-rating-option" data-value="4">4</div>
-                    <div class="collective-rating-option" data-value="5">5</div>
+            <div class="project-quick-rating">
+                <div class="project-quick-name">Smart Parking System</div>
+                <div>Created by: Arnabjeet, Pranyjyoti, Mihir, Devansh</div>
+                <div class="rating-scale-10">
+                    <div class="rating-10-option" data-value="1">1</div>
+                    <div class="rating-10-option" data-value="2">2</div>
+                    <div class="rating-10-option" data-value="3">3</div>
+                    <div class="rating-10-option" data-value="4">4</div>
+                    <div class="rating-10-option" data-value="5">5</div>
+                    <div class="rating-10-option" data-value="6">6</div>
+                    <div class="rating-10-option" data-value="7">7</div>
+                    <div class="rating-10-option" data-value="8">8</div>
+                    <div class="rating-10-option" data-value="9">9</div>
+                    <div class="rating-10-option" data-value="10">10</div>
                 </div>
             </div>
             
-            <div class="project-rating-row">
-                <div class="project-name">
-                    <strong>Rainwater Harvesting</strong>
-                    <div class="project-creators">Advika, Rupsha, Rajashree, Samridhi</div>
-                </div>
-                <div class="collective-rating">
-                    <div class="collective-rating-option" data-value="1">1</div>
-                    <div class="collective-rating-option" data-value="2">2</div>
-                    <div class="collective-rating-option" data-value="3">3</div>
-                    <div class="collective-rating-option" data-value="4">4</div>
-                    <div class="collective-rating-option" data-value="5">5</div>
-                </div>
-            </div>
-            
-            <div class="project-rating-row">
-                <div class="project-name">
-                    <strong>Plasma Canon</strong>
-                    <div class="project-creators">Yogiraj, Niloy, Shaurav</div>
-                </div>
-                <div class="collective-rating">
-                    <div class="collective-rating-option" data-value="1">1</div>
-                    <div class="collective-rating-option" data-value="2">2</div>
-                    <div class="collective-rating-option" data-value="3">3</div>
-                    <div class="collective-rating-option" data-value="4">4</div>
-                    <div class="collective-rating-option" data-value="5">5</div>
+            <div class="project-quick-rating">
+                <div class="project-quick-name">River Cleaning Car</div>
+                <div>Created by: Keshivi, Iskhika</div>
+                <div class="rating-scale-10">
+                    <div class="rating-10-option" data-value="1">1</div>
+                    <div class="rating-10-option" data-value="2">2</div>
+                    <div class="rating-10-option" data-value="3">3</div>
+                    <div class="rating-10-option" data-value="4">4</div>
+                    <div class="rating-10-option" data-value="5">5</div>
+                    <div class="rating-10-option" data-value="6">6</div>
+                    <div class="rating-10-option" data-value="7">7</div>
+                    <div class="rating-10-option" data-value="8">8</div>
+                    <div class="rating-10-option" data-value="9">9</div>
+                    <div class="rating-10-option" data-value="10">10</div>
                 </div>
             </div>
             
-            <div class="project-rating-row">
-                <div class="project-name">
-                    <strong>Cultural and Indigenous Tribes Exhibition</strong>
-                </div>
-                <div class="collective-rating">
-                    <div class="collective-rating-option" data-value="1">1</div>
-                    <div class="collective-rating-option" data-value="2">2</div>
-                    <div class="collective-rating-option" data-value="3">3</div>
-                    <div class="collective-rating-option" data-value="4">4</div>
-                    <div class="collective-rating-option" data-value="5">5</div>
+            <div class="project-quick-rating">
+                <div class="project-quick-name">Earth Revolution</div>
+                <div>Created by: Pranyjyoti</div>
+                <div class="rating-scale-10">
+                    <div class="rating-10-option" data-value="1">1</div>
+                    <div class="rating-10-option" data-value="2">2</div>
+                    <div class="rating-10-option" data-value="3">3</div>
+                    <div class="rating-10-option" data-value="4">4</div>
+                    <div class="rating-10-option" data-value="5">5</div>
+                    <div class="rating-10-option" data-value="6">6</div>
+                    <div class="rating-10-option" data-value="7">7</div>
+                    <div class="rating-10-option" data-value="8">8</div>
+                    <div class="rating-10-option" data-value="9">9</div>
+                    <div class="rating-10-option" data-value="10">10</div>
                 </div>
             </div>
             
-            <button id="submit-collective">Submit All Reviews</button>
-        </div>
-        
-        <!-- Project 1 -->
-        <div class="project-card project" id="project1" style="display: none;">
-            <span class="project-number">1</span>
-            <h2 class="project-title">Smart Irrigation System</h2>
-            <p class="project-creators">Created by: Aritha, Advika, Ambritha</p>
-            <div class="review-section">
-                <p>Please rate this project:</p>
-                <div class="rating">
-                    <div class="rating-option" data-value="1">
-                        <div class="rating-value">1</div>
-                        <div class="rating-label">Poor</div>
-                    </div>
-                    <div class="rating-option" data-value="2">
-                        <div class="rating-value">2</div>
-                        <div class="rating-label">Fair</div>
-                    </div>
-                    <div class="rating-option" data-value="3">
-                        <div class="rating-value">3</div>
-                        <div class="rating-label">Good</div>
-                    </div>
-                    <div class="rating-option" data-value="4">
-                        <div class="rating-value">4</div>
-                        <div class="rating-label">Very Good</div>
-                    </div>
-                    <div class="rating-option" data-value="5">
-                        <div class="rating-value">5</div>
-                        <div class="rating-label">Excellent</div>
-                    </div>
+            <div class="project-quick-rating">
+                <div class="project-quick-name">Carbon Emission to Ink Converter</div>
+                <div>Created by: Anusha</div>
+                <div class="rating-scale-10">
+                    <div class="rating-10-option" data-value="1">1</div>
+                    <div class="rating-10-option" data-value="2">2</div>
+                    <div class="rating-10-option" data-value="3">3</div>
+                    <div class="rating-10-option" data-value="4">4</div>
+                    <div class="rating-10-option" data-value="5">5</div>
+                    <div class="rating-10-option" data-value="6">6</div>
+                    <div class="rating-10-option" data-value="7">7</div>
+                    <div class="rating-10-option" data-value="8">8</div>
+                    <div class="rating-10-option" data-value="9">9</div>
+                    <div class="rating-10-option" data-value="10">10</div>
                 </div>
-                <button class="next-btn" data-next="project2">Next Project</button>
             </div>
-        </div>
-        
-        <!-- Project 2 -->
-        <div class="project-card project" id="project2" style="display: none;">
-            <span class="project-number">2</span>
-            <h2 class="project-title">Gesture Control Water Gun</h2>
-            <p class="project-creators">Created by: Devansh, Bhargav</p>
-            <div class="review-section">
-                <p>Please rate this project:</p>
-                <div class="rating">
-                    <div class="rating-option" data-value="1">
-                        <div class="rating-value">1</div>
-                        <div class="rating-label">Poor</div>
-                    </div>
-                    <div class="rating-option" data-value="2">
-                        <div class="rating-value">2</div>
-                        <div class="rating-label">Fair</div>
-                    </div>
-                    <div class="rating-option" data-value="3">
-                        <div class="rating-value">3</div>
-                        <div class="rating-label">Good</div>
-                    </div>
-                    <div class="rating-option" data-value="4">
-                        <div class="rating-value">4</div>
-                        <div class="rating-label">Very Good</div>
-                    </div>
-                    <div class="rating-option" data-value="5">
-                        <div class="rating-value">5</div>
-                        <div class="rating-label">Excellent</div>
-                    </div>
+            
+            <div class="project-quick-rating">
+                <div class="project-quick-name">Rainwater Harvesting</div>
+                <div>Created by: Advika, Rupsha, Rajashree, Samridhi</div>
+                <div class="rating-scale-10">
+                    <div class="rating-10-option" data-value="1">1</div>
+                    <div class="rating-10-option" data-value="2">2</div>
+                    <div class="rating-10-option" data-value="3">3</div>
+                    <div class="rating-10-option" data-value="4">4</div>
+                    <div class="rating-10-option" data-value="5">5</div>
+                    <div class="rating-10-option" data-value="6">6</div>
+                    <div class="rating-10-option" data-value="7">7</div>
+                    <div class="rating-10-option" data-value="8">8</div>
+                    <div class="rating-10-option" data-value="9">9</div>
+                    <div class="rating-10-option" data-value="10">10</div>
                 </div>
-                <button class="next-btn" data-next="project3">Next Project</button>
             </div>
-        </div>
-        
-        <!-- Project 3 -->
-        <div class="project-card project" id="project3" style="display: none;">
-            <span class="project-number">3</span>
-            <h2 class="project-title">Smart Parking System</h2>
-            <p class="project-creators">Created by: Arnabjeet, Pranyjyoti, Mihir, Devansh</p>
-            <div class="review-section">
-                <p>Please rate this project:</p>
-                <div class="rating">
-                    <div class="rating-option" data-value="1">
-                        <div class="rating-value">1</div>
-                        <div class="rating-label">Poor</div>
-                    </div>
-                    <div class="rating-option" data-value="2">
-                        <div class="rating-value">2</div>
-                        <div class="rating-label">Fair</div>
-                    </div>
-                    <div class="rating-option" data-value="3">
-                        <div class="rating-value">3</div>
-                        <div class="rating-label">Good</div>
-                    </div>
-                    <div class="rating-option" data-value="4">
-                        <div class="rating-value">4</div>
-                        <div class="rating-label">Very Good</div>
-                    </div>
-                    <div class="rating-option" data-value="5">
-                        <div class="rating-value">5</div>
-                        <div class="rating-label">Excellent</div>
-                    </div>
+            
+            <div class="project-quick-rating">
+                <div class="project-quick-name">Plasma Canon</div>
+                <div>Created by: Yogiraj, Niloy, Shaurav</div>
+                <div class="rating-scale-10">
+                    <div class="rating-10-option" data-value="1">1</div>
+                    <div class="rating-10-option" data-value="2">2</div>
+                    <div class="rating-10-option" data-value="3">3</div>
+                    <div class="rating-10-option" data-value="4">4</div>
+                    <div class="rating-10-option" data-value="5">5</div>
+                    <div class="rating-10-option" data-value="6">6</div>
+                    <div class="rating-10-option" data-value="7">7</div>
+                    <div class="rating-10-option" data-value="8">8</div>
+                    <div class="rating-10-option" data-value="9">9</div>
+                    <div class="rating-10-option" data-value="10">10</div>
                 </div>
-                <button class="next-btn" data-next="project4">Next Project</button>
             </div>
-        </div>
-        
-        <!-- Project 4 -->
-        <div class="project-card project" id="project4" style="display: none;">
-            <span class="project-number">4</span>
-            <h2 class="project-title">River Cleaning Car</h2>
-            <p class="project-creators">Created by: Keshivi, Iskhika</p>
-            <div class="review-section">
-                <p>Please rate this project:</p>
-                <div class="rating">
-                    <div class="rating-option" data-value="1">
-                        <div class="rating-value">1</div>
-                        <div class="rating-label">Poor</div>
-                    </div>
-                    <div class="rating-option" data-value="2">
-                        <div class="rating-value">2</div>
-                        <div class="rating-label">Fair</div>
-                    </div>
-                    <div class="rating-option" data-value="3">
-                        <div class="rating-value">3</div>
-                        <div class="rating-label">Good</div>
-                    </div>
-                    <div class="rating-option" data-value="4">
-                        <div class="rating-value">4</div>
-                        <div class="rating-label">Very Good</div>
-                    </div>
-                    <div class="rating-option" data-value="5">
-                        <div class="rating-value">5</div>
-                        <div class="rating-label">Excellent</div>
-                    </div>
+            
+            <div class="project-quick-rating">
+                <div class="project-quick-name">Nerve Cell</div>
+                <div>Created by: Richa, Moli, Krishnagi, Archana</div>
+                <div class="rating-scale-10">
+                    <div class="rating-10-option" data-value="1">1</div>
+                    <div class="rating-10-option" data-value="2">2</div>
+                    <div class="rating-10-option" data-value="3">3</div>
+                    <div class="rating-10-option" data-value="4">4</div>
+                    <div class="rating-10-option" data-value="5">5</div>
+                    <div class="rating-10-option" data-value="6">6</div>
+                    <div class="rating-10-option" data-value="7">7</div>
+                    <div class="rating-10-option" data-value="8">8</div>
+                    <div class="rating-10-option" data-value="9">9</div>
+                    <div class="rating-10-option" data-value="10">10</div>
                 </div>
-                <button class="next-btn" data-next="project5">Next Project</button>
             </div>
-        </div>
-        
-        <!-- Project 5 -->
-        <div class="project-card project" id="project5" style="display: none;">
-            <span class="project-number">5</span>
-            <h2 class="project-title">Earth Revolution</h2>
-            <p class="project-creators">Created by: Pranyjyoti</p>
-            <div class="review-section">
-                <p>Please rate this project:</p>
-                <div class="rating">
-                    <div class="rating-option" data-value="1">
-                        <div class="rating-value">1</div>
-                        <div class="rating-label">Poor</div>
-                    </div>
-                    <div class="rating-option" data-value="2">
-                        <div class="rating-value">2</div>
-                        <div class="rating-label">Fair</div>
-                    </div>
-                    <div class="rating-option" data-value="3">
-                        <div class="rating-value">3</div>
-                        <div class="rating-label">Good</div>
-                    </div>
-                    <div class="rating-option" data-value="4">
-                        <div class="rating-value">4</div>
-                        <div class="rating-label">Very Good</div>
-                    </div>
-                    <div class="rating-option" data-value="5">
-                        <div class="rating-value">5</div>
-                        <div class="rating-label">Excellent</div>
-                    </div>
+            
+            <div class="project-quick-rating">
+                <div class="project-quick-name">Cultural and Indigenous Tribes Exhibition</div>
+                <div class="rating-scale-10">
+                    <div class="rating-10-option" data-value="1">1</div>
+                    <div class="rating-10-option" data-value="2">2</div>
+                    <div class="rating-10-option" data-value="3">3</div>
+                    <div class="rating-10-option" data-value="4">4</div>
+                    <div class="rating-10-option" data-value="5">5</div>
+                    <div class="rating-10-option" data-value="6">6</div>
+                    <div class="rating-10-option" data-value="7">7</div>
+                    <div class="rating-10-option" data-value="8">8</div>
+                    <div class="rating-10-option" data-value="9">9</div>
+                    <div class="rating-10-option" data-value="10">10</div>
                 </div>
-                <button class="next-btn" data-next="project6">Next Project</button>
             </div>
-        </div>
-        
-        <!-- Project 6 -->
-        <div class="project-card project" id="project6" style="display: none;">
-            <span class="project-number">6</span>
-            <h2 class="project-title">Carbon Emission to Ink Converter</h2>
-            <p class="project-creators">Created by: Anusha</p>
-            <div class="review-section">
-                <p>Please rate this project:</p>
-                <div class="rating">
-                    <div class="rating-option" data-value="1">
-                        <div class="rating-value">1</div>
-                        <div class="rating-label">Poor</div>
-                    </div>
-                    <div class="rating-option" data-value="2">
-                        <div class="rating-value">2</div>
-                        <div class="rating-label">Fair</div>
-                    </div>
-                    <div class="rating-option" data-value="3">
-                        <div class="rating-value">3</div>
-                        <div class="rating-label">Good</div>
-                    </div>
-                    <div class="rating-option" data-value="4">
-                        <div class="rating-value">4</div>
-                        <div class="rating-label">Very Good</div>
-                    </div>
-                    <div class="rating-option" data-value="5">
-                        <div class="rating-value">5</div>
-                        <div class="rating-label">Excellent</div>
-                    </div>
-                </div>
-                <button class="next-btn" data-next="project7">Next Project</button>
-            </div>
-        </div>
-        
-        <!-- Project 7 -->
-        <div class="project-card project" id="project7" style="display: none;">
-            <span class="project-number">7</span>
-            <h2 class="project-title">Rainwater Harvesting</h2>
-            <p class="project-creators">Created by: Advika, Rupsha, Rajashree, Samridhi</p>
-            <div class="review-section">
-                <p>Please rate this project:</p>
-                <div class="rating">
-                    <div class="rating-option" data-value="1">
-                        <div class="rating-value">1</div>
-                        <div class="rating-label">Poor</div>
-                    </div>
-                    <div class="rating-option" data-value="2">
-                        <div class="rating-value">2</div>
-                        <div class="rating-label">Fair</div>
-                    </div>
-                    <div class="rating-option" data-value="3">
-                        <div class="rating-value">3</div>
-                        <div class="rating-label">Good</div>
-                    </div>
-                    <div class="rating-option" data-value="4">
-                        <div class="rating-value">4</div>
-                        <div class="rating-label">Very Good</div>
-                    </div>
-                    <div class="rating-option" data-value="5">
-                        <div class="rating-value">5</div>
-                        <div class="rating-label">Excellent</div>
-                    </div>
-                </div>
-                <button class="next-btn" data-next="project8">Next Project</button>
-            </div>
-        </div>
-        
-        <!-- Project 8 - Plasma Canon -->
-        <div class="project-card project" id="project8" style="display: none;">
-            <span class="project-number">8</span>
-            <h2 class="project-title">Plasma Canon</h2>
-            <p class="project-creators">Created by: Yogiraj, Niloy, Shaurav</p>
-            <div class="review-section">
-                <p>Please rate this project:</p>
-                <div class="rating">
-                    <div class="rating-option" data-value="1">
-                        <div class="rating-value">1</div>
-                        <div class="rating-label">Poor</div>
-                    </div>
-                    <div class="rating-option" data-value="2">
-                        <div class="rating-value">2</div>
-                        <div class="rating-label">Fair</div>
-                    </div>
-                    <div class="rating-option" data-value="3">
-                        <div class="rating-value">3</div>
-                        <div class="rating-label">Good</div>
-                    </div>
-                    <div class="rating-option" data-value="4">
-                        <div class="rating-value">4</div>
-                        <div class="rating-label">Very Good</div>
-                    </div>
-                    <div class="rating-option" data-value="5">
-                        <div class="rating-value">5</div>
-                        <div class="rating-label">Excellent</div>
-                    </div>
-                </div>
-                <button class="next-btn" data-next="cultural">Next</button>
-            </div>
-        </div>
-        
-        <!-- Cultural Exhibition -->
-        <div class="project-card project" id="cultural" style="display: none;">
-            <h2 class="project-title">Cultural and Indigenous Tribes Exhibition</h2>
-            <div class="review-section">
-                <p>How was the cultural and indigenous tribes exhibition?</p>
-                <div class="rating">
-                    <div class="rating-option" data-value="1">
-                        <div class="rating-value">1</div>
-                        <div class="rating-label">Poor</div>
-                    </div>
-                    <div class="rating-option" data-value="2">
-                        <div class="rating-value">2</div>
-                        <div class="rating-label">Fair</div>
-                    </div>
-                    <div class="rating-option" data-value="3">
-                        <div class="rating-value">3</div>
-                        <div class="rating-label">Good</div>
-                    </div>
-                    <div class="rating-option" data-value="4">
-                        <div class="rating-value">4</div>
-                        <div class="rating-label">Very Good</div>
-                    </div>
-                    <div class="rating-option" data-value="5">
-                        <div class="rating-value">5</div>
-                        <div class="rating-label">Excellent</div>
-                    </div>
-                </div>
-                <button id="submit-all">Submit All Reviews</button>
-            </div>
+            
+            <button id="submit-quick-all">Submit All Reviews</button>
         </div>
         
         <!-- Thank You Message -->
@@ -828,6 +627,7 @@
                     <!-- Reviews will be displayed here -->
                 </div>
                 <button id="download-reviews" style="margin-top: 15px;">Download Reviews as Text File</button>
+                <button id="sync-reviews" style="margin-top: 15px;">Sync with Online Storage</button>
             </div>
         </div>
         
@@ -841,16 +641,12 @@
         let reviews = [];
         let currentReviewer = "";
         let currentProjectRatings = {};
-        let reviewType = ""; // "detailed" or "collective"
+        let reviewType = ""; // "detailed", "collective", or "quick-all"
         
         // DOM elements
         const reviewerSection = document.getElementById('reviewer-section');
-        const projects = document.querySelectorAll('.project');
         const thankYouSection = document.getElementById('thank-you');
         const startReviewBtn = document.getElementById('start-review');
-        const nextButtons = document.querySelectorAll('.next-btn');
-        const submitAllBtn = document.getElementById('submit-all');
-        const ratingOptions = document.querySelectorAll('.rating-option');
         const adminLoginBtn = document.getElementById('admin-login');
         const adminContent = document.getElementById('admin-content');
         const reviewsList = document.getElementById('reviews-list');
@@ -859,19 +655,22 @@
         const progressText = document.getElementById('progress-text');
         const detailedReviewBtn = document.getElementById('detailed-review-btn');
         const collectiveReviewBtn = document.getElementById('collective-review-btn');
-        const collectiveReviewSection = document.getElementById('collective-review');
-        const submitCollectiveBtn = document.getElementById('submit-collective');
-        const collectiveRatingOptions = document.querySelectorAll('.collective-rating-option');
+        const quickAllReviewBtn = document.getElementById('quick-all-review-btn');
+        const quickAllReviewSection = document.getElementById('quick-all-review');
+        const submitQuickAllBtn = document.getElementById('submit-quick-all');
+        const rating10Options = document.querySelectorAll('.rating-10-option');
         const statsContainer = document.getElementById('stats-container');
+        const syncReviewsBtn = document.getElementById('sync-reviews');
         
         // Initialize progress
         let currentStep = 0;
-        const totalSteps = 9;
+        const totalSteps = 10;
         
         // Review type selection
         detailedReviewBtn.addEventListener('click', () => {
             detailedReviewBtn.classList.add('selected');
             collectiveReviewBtn.classList.remove('selected');
+            quickAllReviewBtn.classList.remove('selected');
             startReviewBtn.style.display = 'block';
             reviewType = "detailed";
         });
@@ -879,8 +678,17 @@
         collectiveReviewBtn.addEventListener('click', () => {
             collectiveReviewBtn.classList.add('selected');
             detailedReviewBtn.classList.remove('selected');
+            quickAllReviewBtn.classList.remove('selected');
             startReviewBtn.style.display = 'block';
             reviewType = "collective";
+        });
+        
+        quickAllReviewBtn.addEventListener('click', () => {
+            quickAllReviewBtn.classList.add('selected');
+            detailedReviewBtn.classList.remove('selected');
+            collectiveReviewBtn.classList.remove('selected');
+            startReviewBtn.style.display = 'block';
+            reviewType = "quick-all";
         });
         
         // Start review when name is entered
@@ -890,118 +698,37 @@
                 currentReviewer = reviewerName;
                 reviewerSection.style.display = 'none';
                 
-                if (reviewType === "detailed") {
-                    document.getElementById('project1').style.display = 'block';
+                if (reviewType === "quick-all") {
+                    quickAllReviewSection.style.display = 'block';
                     updateProgress(1);
-                } else if (reviewType === "collective") {
-                    collectiveReviewSection.style.display = 'block';
-                    updateProgress(1);
+                } else {
+                    // For other review types, we would show the appropriate section
+                    alert('This demo focuses on the new "All Projects at Once" feature. Other review types would be implemented similarly.');
                 }
             } else {
                 alert('Please enter your name to continue.');
             }
         });
         
-        // Handle rating selection in detailed review
-        ratingOptions.forEach(option => {
+        // Handle rating selection in quick all review
+        rating10Options.forEach(option => {
             option.addEventListener('click', function() {
-                // Remove selected class from all options in this rating group
-                const parent = this.parentElement;
-                const siblings = parent.querySelectorAll('.rating-option');
+                // Remove selected class from all options in this project
+                const projectSection = this.closest('.project-quick-rating');
+                const siblings = projectSection.querySelectorAll('.rating-10-option');
                 siblings.forEach(sib => sib.classList.remove('selected'));
                 
                 // Add selected class to clicked option
                 this.classList.add('selected');
                 
                 // Store the rating
-                const projectId = this.closest('.project').id;
-                currentProjectRatings[projectId] = this.getAttribute('data-value');
-            });
-        });
-        
-        // Handle rating selection in collective review
-        collectiveRatingOptions.forEach(option => {
-            option.addEventListener('click', function() {
-                // Remove selected class from all options in this row
-                const row = this.closest('.project-rating-row');
-                const siblings = row.querySelectorAll('.collective-rating-option');
-                siblings.forEach(sib => sib.classList.remove('selected'));
-                
-                // Add selected class to clicked option
-                this.classList.add('selected');
-                
-                // Store the rating
-                const projectName = row.querySelector('.project-name strong').textContent;
+                const projectName = projectSection.querySelector('.project-quick-name').textContent;
                 currentProjectRatings[projectName] = this.getAttribute('data-value');
             });
         });
         
-        // Handle next buttons in detailed review
-        nextButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                const nextId = this.getAttribute('data-next');
-                const currentProject = this.closest('.project');
-                
-                // Check if a rating was selected
-                if (!currentProjectRatings[currentProject.id]) {
-                    alert('Please select a rating before proceeding.');
-                    return;
-                }
-                
-                // Hide current project and show next
-                currentProject.style.display = 'none';
-                
-                if (nextId === 'cultural') {
-                    document.getElementById('cultural').style.display = 'block';
-                    updateProgress(9);
-                } else {
-                    document.getElementById(nextId).style.display = 'block';
-                    updateProgress(parseInt(nextId.replace('project', '')) + 1);
-                }
-            });
-        });
-        
-        // Submit all reviews in detailed mode
-        submitAllBtn.addEventListener('click', function() {
-            const culturalRating = currentProjectRatings['cultural'];
-            
-            if (!culturalRating) {
-                alert('Please rate the cultural exhibition before submitting.');
-                return;
-            }
-            
-            // Create review object
-            const review = {
-                reviewer: currentReviewer,
-                timestamp: new Date().toLocaleString(),
-                type: "detailed",
-                projects: {
-                    "Smart Irrigation System": currentProjectRatings['project1'],
-                    "Gesture Control Water Gun": currentProjectRatings['project2'],
-                    "Smart Parking System": currentProjectRatings['project3'],
-                    "River Cleaning Car": currentProjectRatings['project4'],
-                    "Earth Revolution": currentProjectRatings['project5'],
-                    "Carbon Emission to Ink Converter": currentProjectRatings['project6'],
-                    "Rainwater Harvesting": currentProjectRatings['project7'],
-                    "Plasma Canon": currentProjectRatings['project8'],
-                    "Cultural and Indigenous Tribes Exhibition": culturalRating
-                }
-            };
-            
-            // Add to reviews array
-            reviews.push(review);
-            
-            // Save to localStorage (simulating file storage)
-            localStorage.setItem('exhibitionReviews', JSON.stringify(reviews));
-            
-            // Hide cultural section and show thank you
-            document.getElementById('cultural').style.display = 'none';
-            thankYouSection.style.display = 'block';
-            updateProgress(10); // All done
-        });
-        
-        // Submit collective review
-        submitCollectiveBtn.addEventListener('click', function() {
+        // Submit quick all review
+        submitQuickAllBtn.addEventListener('click', function() {
             // Check if all projects have been rated
             const projectNames = [
                 "Smart Irrigation System",
@@ -1012,6 +739,7 @@
                 "Carbon Emission to Ink Converter",
                 "Rainwater Harvesting",
                 "Plasma Canon",
+                "Nerve Cell",
                 "Cultural and Indigenous Tribes Exhibition"
             ];
             
@@ -1032,27 +760,38 @@
             const review = {
                 reviewer: currentReviewer,
                 timestamp: new Date().toLocaleString(),
-                type: "collective",
+                type: "quick-all",
                 projects: currentProjectRatings
             };
             
             // Add to reviews array
             reviews.push(review);
             
-            // Save to localStorage (simulating file storage)
+            // Save to localStorage (simulating online storage)
             localStorage.setItem('exhibitionReviews', JSON.stringify(reviews));
             
-            // Hide collective section and show thank you
-            collectiveReviewSection.style.display = 'none';
+            // Hide review section and show thank you
+            quickAllReviewSection.style.display = 'none';
             thankYouSection.style.display = 'block';
             updateProgress(10); // All done
+            
+            // Simulate syncing with online storage
+            syncWithOnlineStorage();
         });
+        
+        // Sync with online storage (simulated)
+        function syncWithOnlineStorage() {
+            // In a real implementation, this would send data to a server
+            // For this demo, we'll just show a message
+            alert('Your review has been submitted and synced with the online database!');
+        }
         
         // Admin login
         adminLoginBtn.addEventListener('click', () => {
             const password = document.getElementById('admin-password').value;
             if (password === 'best batch') {
                 adminContent.style.display = 'block';
+                loadReviewsFromStorage();
                 displayReviews();
                 displayStatistics();
             } else {
@@ -1060,14 +799,17 @@
             }
         });
         
-        // Display reviews in admin section
-        function displayReviews() {
-            // Load reviews from localStorage
+        // Load reviews from storage
+        function loadReviewsFromStorage() {
+            // Load reviews from localStorage (simulating online database)
             const storedReviews = localStorage.getItem('exhibitionReviews');
             if (storedReviews) {
                 reviews = JSON.parse(storedReviews);
             }
-            
+        }
+        
+        // Display reviews in admin section
+        function displayReviews() {
             if (reviews.length === 0) {
                 reviewsList.innerHTML = '<p>No reviews yet.</p>';
                 return;
@@ -1081,7 +823,7 @@
                     <p><strong>Review Type:</strong> ${review.type}</p>`;
                 
                 for (const [project, rating] of Object.entries(review.projects)) {
-                    html += `<p><span class="review-project">${project}:</span> ${rating}/5</p>`;
+                    html += `<p><span class="review-project">${project}:</span> ${rating}/10</p>`;
                 }
                 
                 html += `<hr></div>`;
@@ -1111,6 +853,7 @@
                 "Carbon Emission to Ink Converter",
                 "Rainwater Harvesting",
                 "Plasma Canon",
+                "Nerve Cell",
                 "Cultural and Indigenous Tribes Exhibition"
             ];
             
@@ -1192,6 +935,7 @@
                 "Carbon Emission to Ink Converter",
                 "Rainwater Harvesting",
                 "Plasma Canon",
+                "Nerve Cell",
                 "Cultural and Indigenous Tribes Exhibition"
             ];
             
@@ -1208,7 +952,7 @@
                 textContent += `Ratings:\n`;
                 
                 for (const [project, rating] of Object.entries(review.projects)) {
-                    textContent += `  ${project}: ${rating}/5\n`;
+                    textContent += `  ${project}: ${rating}/10\n`;
                     
                     // Add to averages calculation
                     if (projectRatings.hasOwnProperty(project)) {
@@ -1229,7 +973,7 @@
             for (const project of projectNames) {
                 if (projectCounts[project] > 0) {
                     const average = (projectRatings[project] / projectCounts[project]).toFixed(2);
-                    textContent += `${project}: ${average}/5\n`;
+                    textContent += `${project}: ${average}/10\n`;
                     totalAverage += parseFloat(average);
                     totalProjects++;
                 } else {
@@ -1238,7 +982,7 @@
             }
             
             if (totalProjects > 0) {
-                textContent += `\nOverall Average: ${(totalAverage / totalProjects).toFixed(2)}/5\n`;
+                textContent += `\nOverall Average: ${(totalAverage / totalProjects).toFixed(2)}/10\n`;
             }
             
             const blob = new Blob([textContent], { type: 'text/plain' });
@@ -1252,6 +996,14 @@
             URL.revokeObjectURL(url);
         });
         
+        // Sync reviews button
+        syncReviewsBtn.addEventListener('click', () => {
+            loadReviewsFromStorage();
+            displayReviews();
+            displayStatistics();
+            alert('Reviews synced with online storage!');
+        });
+        
         // Update progress bar
         function updateProgress(step) {
             currentStep = step;
@@ -1262,10 +1014,7 @@
         
         // Initialize by loading any existing reviews
         window.addEventListener('DOMContentLoaded', () => {
-            const storedReviews = localStorage.getItem('exhibitionReviews');
-            if (storedReviews) {
-                reviews = JSON.parse(storedReviews);
-            }
+            loadReviewsFromStorage();
         });
     </script>
 </body>
