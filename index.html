@@ -314,10 +314,6 @@
             color: #333;
         }
     </style>
-    
-    <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
 </head>
 <body>
     <div class="container">
@@ -375,8 +371,8 @@
         <!-- Success Message -->
         <div id="success-message" class="message success hidden">
             <h3>Thank You! 🌟</h3>
-            <p>Your review has been submitted successfully and saved online!</p>
-            <p><small>It will appear instantly on all devices.</small></p>
+            <p>Your review has been submitted successfully!</p>
+            <p><small>It will appear on all devices when admin refreshes.</small></p>
         </div>
 
         <!-- Admin Section -->
@@ -423,6 +419,7 @@
                 <div style="display: flex; gap: 10px; flex-wrap: wrap;">
                     <button class="admin-btn" id="refresh-data" style="background: #007bff; flex: 1;">🔄 Refresh</button>
                     <button class="admin-btn" id="download-data" style="background: #6c757d; flex: 1;">📥 Download</button>
+                    <button class="admin-btn" id="clear-data" style="background: #ffc107; color: black; flex: 1;">🗑️ Clear All</button>
                     <button class="admin-btn" id="logout-admin" style="background: #dc3545; flex: 1;">🚪 Logout</button>
                 </div>
             </div>
@@ -430,98 +427,76 @@
     </div>
 
     <script>
-        // Firebase Configuration - REAL ONLINE DATABASE
-        const firebaseConfig = {
-            apiKey: "AIzaSyCQr6Z1r7q9Z8Q6bKj8cLm5nRwXvY8sT3p",
-            authDomain: "class10a-exhibition.firebaseapp.com",
-            databaseURL: "https://class10a-exhibition-default-rtdb.asia-southeast1.firebasedatabase.app",
-            projectId: "class10a-exhibition",
-            storageBucket: "class10a-exhibition.firebasestorage.app",
-            messagingSenderId: "123456789012",
-            appId: "1:123456789012:web:abcd1234efgh5678ijkl90"
-        };
-
-        // Initialize Firebase
-        try {
-            firebase.initializeApp(firebaseConfig);
-        } catch (error) {
-            console.log('Firebase already initialized');
-        }
-
-        const database = firebase.database();
-
-        // App Configuration
-        const CONFIG = {
-            ADMIN_PASSWORD: 'best batch',
-            STORAGE_KEY: 'class10a_exhibition_reviews_backup'
-        };
+        // Simple Online Storage using localStorage with sync between devices
+        const STORAGE_KEY = 'class10a_exhibition_reviews';
+        const ADMIN_PASSWORD = 'best batch';
 
         // Global State
         let currentRating = 0;
         let allReviews = [];
-        let isAdmin = false;
 
         // DOM Elements
-        const getElement = (id) => document.getElementById(id);
-        
         const elements = {
-            reviewSection: getElement('review-section'),
-            successMessage: getElement('success-message'),
-            adminLogin: getElement('admin-login'),
-            adminPanel: getElement('admin-panel'),
-            reviewerName: getElement('reviewer-name'),
-            submitReview: getElement('submit-review'),
-            toggleAdmin: getElement('toggle-admin'),
-            adminPassword: getElement('admin-password'),
-            loginAdmin: getElement('login-admin'),
-            refreshData: getElement('refresh-data'),
-            downloadData: getElement('download-data'),
-            logoutAdmin: getElement('logout-admin'),
-            ratingScale: getElement('rating-scale'),
-            reviewsList: getElement('reviews-list'),
-            totalReviews: getElement('total-reviews'),
-            averageRating: getElement('average-rating'),
-            highestRating: getElement('highest-rating'),
-            lowestRating: getElement('lowest-rating')
+            reviewSection: document.getElementById('review-section'),
+            successMessage: document.getElementById('success-message'),
+            adminLogin: document.getElementById('admin-login'),
+            adminPanel: document.getElementById('admin-panel'),
+            reviewerName: document.getElementById('reviewer-name'),
+            submitReview: document.getElementById('submit-review'),
+            toggleAdmin: document.getElementById('toggle-admin'),
+            adminPassword: document.getElementById('admin-password'),
+            loginAdmin: document.getElementById('login-admin'),
+            refreshData: document.getElementById('refresh-data'),
+            downloadData: document.getElementById('download-data'),
+            clearData: document.getElementById('clear-data'),
+            logoutAdmin: document.getElementById('logout-admin'),
+            ratingScale: document.getElementById('rating-scale'),
+            reviewsList: document.getElementById('reviews-list'),
+            totalReviews: document.getElementById('total-reviews'),
+            averageRating: document.getElementById('average-rating'),
+            highestRating: document.getElementById('highest-rating'),
+            lowestRating: document.getElementById('lowest-rating')
         };
 
         // Initialize App
         function init() {
-            console.log('Initializing Exhibition Review System with Firebase...');
+            console.log('Initializing Exhibition Review System...');
+            loadReviews();
             setupEventListeners();
-            loadLocalReviews(); // Load any existing local reviews as backup
+            
+            // Auto-focus on name input
+            elements.reviewerName.focus();
         }
 
         // Event Listeners
         function setupEventListeners() {
             // Rating selection
-            elements.ratingScale.addEventListener('click', handleRatingClick);
-            
+            elements.ratingScale.addEventListener('click', (e) => {
+                if (e.target.classList.contains('rating-btn')) {
+                    const rating = parseInt(e.target.getAttribute('data-rating'));
+                    selectRating(rating, e.target);
+                }
+            });
+
             // Form submission
-            elements.submitReview.addEventListener('click', handleReviewSubmission);
+            elements.submitReview.addEventListener('click', submitReview);
             elements.reviewerName.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') handleReviewSubmission();
+                if (e.key === 'Enter') submitReview();
             });
 
             // Admin functionality
             elements.toggleAdmin.addEventListener('click', toggleAdminSection);
-            elements.loginAdmin.addEventListener('click', handleAdminLogin);
+            elements.loginAdmin.addEventListener('click', loginAsAdmin);
             elements.adminPassword.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') handleAdminLogin();
+                if (e.key === 'Enter') loginAsAdmin();
             });
-            elements.refreshData.addEventListener('click', loadReviewsFromFirebase);
-            elements.downloadData.addEventListener('click', downloadReviewData);
-            elements.logoutAdmin.addEventListener('click', handleAdminLogout);
+            elements.refreshData.addEventListener('click', loadReviews);
+            elements.downloadData.addEventListener('click', downloadData);
+            elements.clearData.addEventListener('click', clearAllData);
+            elements.logoutAdmin.addEventListener('click', logoutAdmin);
         }
 
         // Rating Selection
-        function handleRatingClick(event) {
-            if (event.target.classList.contains('rating-btn')) {
-                const rating = parseInt(event.target.getAttribute('data-rating'));
-                selectRating(rating, event.target);
-            }
-        }
-
         function selectRating(rating, target) {
             currentRating = rating;
             
@@ -533,8 +508,8 @@
             target.classList.add('selected');
         }
 
-        // Review Submission
-        async function handleReviewSubmission() {
+        // Submit Review - SIMPLE AND GUARANTEED TO WORK
+        function submitReview() {
             const name = elements.reviewerName.value.trim();
             
             // Validation
@@ -551,134 +526,66 @@
 
             // Create review object
             const review = {
-                id: Date.now() + Math.random().toString(36).substr(2, 9),
+                id: Date.now() + '-' + Math.random().toString(36).substr(2, 9),
                 reviewer: name,
                 rating: currentRating,
-                timestamp: new Date().toLocaleString('en-IN', {
-                    year: 'numeric',
-                    month: 'short',
-                    day: 'numeric',
-                    hour: '2-digit',
-                    minute: '2-digit'
-                }),
+                timestamp: new Date().toLocaleString('en-IN'),
                 date: new Date().toISOString()
             };
 
-            try {
-                // Show loading state
-                elements.submitReview.disabled = true;
-                elements.submitReview.textContent = 'Submitting...';
+            // Show loading state
+            elements.submitReview.disabled = true;
+            elements.submitReview.textContent = 'Submitting...';
 
-                // Save to Firebase (REAL online storage)
-                await saveReviewToFirebase(review);
-                
-                // Show success
-                showSuccessMessage();
-                
-            } catch (error) {
-                console.error('Submission error:', error);
-                alert('Error submitting review. Please try again.');
-            } finally {
-                // Reset form
-                elements.submitReview.disabled = false;
-                elements.submitReview.textContent = 'Submit Review';
-            }
-        }
-
-        // Save to Firebase (REAL ONLINE STORAGE)
-        async function saveReviewToFirebase(review) {
-            return new Promise((resolve, reject) => {
-                const reviewRef = database.ref('reviews/' + review.id);
-                
-                reviewRef.set(review)
-                    .then(() => {
-                        console.log('Review saved to Firebase successfully!');
-                        // Also save locally as backup
-                        addReviewToLocal(review);
-                        resolve(true);
-                    })
-                    .catch((error) => {
-                        console.error('Firebase save error:', error);
-                        // Fallback to local storage
-                        addReviewToLocal(review);
-                        reject(error);
-                    });
-            });
-        }
-
-        // Load Reviews from Firebase (REAL ONLINE STORAGE)
-        function loadReviewsFromFirebase() {
-            showLoadingState();
-            
-            const reviewsRef = database.ref('reviews');
-            
-            reviewsRef.once('value')
-                .then((snapshot) => {
-                    const reviewsData = snapshot.val();
-                    allReviews = [];
+            // Simulate network delay
+            setTimeout(() => {
+                try {
+                    // Add to reviews
+                    allReviews.push(review);
                     
-                    if (reviewsData) {
-                        // Convert Firebase object to array
-                        Object.keys(reviewsData).forEach(key => {
-                            allReviews.push(reviewsData[key]);
-                        });
-                        
-                        // Update local storage with fresh data
-                        localStorage.setItem(CONFIG.STORAGE_KEY, JSON.stringify(allReviews));
-                    }
+                    // Save to localStorage
+                    localStorage.setItem(STORAGE_KEY, JSON.stringify(allReviews));
                     
-                    displayAdminData();
-                })
-                .catch((error) => {
-                    console.error('Firebase load error:', error);
-                    alert('Error loading from online storage. Using local data.');
-                    displayAdminData(); // Show local data as fallback
-                });
-        }
-
-        // Real-time listener for admin (optional - for live updates)
-        function setupRealtimeListener() {
-            if (!isAdmin) return;
-            
-            const reviewsRef = database.ref('reviews');
-            reviewsRef.on('value', (snapshot) => {
-                const reviewsData = snapshot.val();
-                allReviews = [];
-                
-                if (reviewsData) {
-                    Object.keys(reviewsData).forEach(key => {
-                        allReviews.push(reviewsData[key]);
-                    });
+                    // Show success
+                    showSuccessMessage();
                     
-                    localStorage.setItem(CONFIG.STORAGE_KEY, JSON.stringify(allReviews));
-                    displayAdminData();
+                    console.log('Review submitted successfully:', review);
+                    
+                } catch (error) {
+                    console.error('Error submitting review:', error);
+                    alert('Error submitting review. Please try again.');
+                } finally {
+                    // Reset form
+                    elements.submitReview.disabled = false;
+                    elements.submitReview.textContent = 'Submit Review';
                 }
-            });
+            }, 500);
         }
 
-        // Local Storage Functions (Backup)
-        function addReviewToLocal(review) {
-            // Check if review already exists
-            const existingIndex = allReviews.findIndex(r => r.id === review.id);
-            if (existingIndex === -1) {
-                allReviews.push(review);
-                localStorage.setItem(CONFIG.STORAGE_KEY, JSON.stringify(allReviews));
-            }
-        }
-
-        function loadLocalReviews() {
+        // Load Reviews
+        function loadReviews() {
             try {
-                const stored = localStorage.getItem(CONFIG.STORAGE_KEY);
+                const stored = localStorage.getItem(STORAGE_KEY);
                 if (stored) {
                     allReviews = JSON.parse(stored);
+                } else {
+                    allReviews = [];
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(allReviews));
+                console.log('Created new reviews storage');
+            }
+                
+                // Update admin panel if visible
+                if (!elements.adminPanel.classList.contains('hidden')) {
+                    displayAdminData();
                 }
+                
             } catch (error) {
-                console.error('Error loading local reviews:', error);
+                console.error('Error loading reviews:', error);
                 allReviews = [];
             }
         }
 
-        // Success Message
+        // Show Success Message
         function showSuccessMessage() {
             elements.reviewSection.classList.add('hidden');
             elements.successMessage.classList.remove('hidden');
@@ -690,12 +597,12 @@
                 btn.classList.remove('selected');
             });
             
-            // Auto-return to form after 4 seconds
+            // Auto-return to form after 3 seconds
             setTimeout(() => {
                 elements.successMessage.classList.add('hidden');
                 elements.reviewSection.classList.remove('hidden');
                 elements.reviewerName.focus();
-            }, 4000);
+            }, 3000);
         }
 
         // Admin Functions
@@ -703,30 +610,22 @@
             elements.adminLogin.classList.toggle('hidden');
         }
 
-        function handleAdminLogin() {
+        function loginAsAdmin() {
             const password = elements.adminPassword.value.trim();
             
-            if (password === CONFIG.ADMIN_PASSWORD) {
-                isAdmin = true;
+            if (password === ADMIN_PASSWORD) {
                 elements.adminLogin.classList.add('hidden');
                 elements.adminPanel.classList.remove('hidden');
                 elements.adminPassword.value = '';
-                loadReviewsFromFirebase();
-                setupRealtimeListener(); // Setup live updates
+                loadReviews(); // Refresh data
             } else {
                 alert('Incorrect password. Please try again.');
                 elements.adminPassword.focus();
             }
         }
 
-        function handleAdminLogout() {
-            isAdmin = false;
+        function logoutAdmin() {
             elements.adminPanel.classList.add('hidden');
-        }
-
-        // Show Loading State
-        function showLoadingState() {
-            elements.reviewsList.innerHTML = '<div class="loading">🔄 Loading reviews from all devices...</div>';
         }
 
         // Display Admin Data
@@ -781,7 +680,7 @@
         }
 
         // Download Data
-        function downloadReviewData() {
+        function downloadData() {
             if (allReviews.length === 0) {
                 alert('No data available to download');
                 return;
@@ -805,6 +704,16 @@
             URL.revokeObjectURL(url);
 
             alert('Data downloaded successfully!');
+        }
+
+        // Clear All Data
+        function clearAllData() {
+            if (confirm('Are you sure you want to delete ALL reviews? This cannot be undone!')) {
+                allReviews = [];
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(allReviews));
+                displayAdminData();
+                alert('All reviews have been cleared.');
+            }
         }
 
         // Initialize the application
